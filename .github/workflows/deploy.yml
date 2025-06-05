@@ -1,0 +1,39 @@
+name: Build & Deploy Pelican site
+on:
+  push:
+    branches: [main]        # build on every push to main
+  workflow_dispatch:        # manual trigger button
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out source
+      uses: actions/checkout@v4
+
+    # Optional: speed up installs with uv – comment out if you stick to pip
+    - name: Install uv
+      run: pip install uv
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install deps
+      run: |
+        uv sync
+
+    - name: Build site with Pelican
+      run: |
+        pelican content \
+               --settings publishconf.py \
+               --output output
+
+    - name: Deploy to gh-pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        publish_branch: gh-pages
+        publish_dir: output
+        # pushes as github-actions bot

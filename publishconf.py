@@ -1,3 +1,3 @@
 from pelicanconf import *
-SITEURL = "https://pydata-roma.github.io"
+SITEURL = "https://PyDataRomaCapitale.github.io"
 RELATIVE_URLS = False
