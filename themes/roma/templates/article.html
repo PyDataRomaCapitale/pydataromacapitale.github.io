@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<header class="strip--info text-white text-center py-5">
+  <div class="container">
+    <h1 class="fw-bold">{{ article.title }}</h1>
+    <p class="small mb-0">{{ article.date.strftime('%B %-d, %Y') }}</p>
+  </div>
+</header>
+<main class="py-5">
+  <div class="container">
+    {{ article.content }}
+  </div>
+</main>
+{% endblock %}

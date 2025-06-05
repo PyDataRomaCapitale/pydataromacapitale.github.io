@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Hero -->
+<header class="hero-image text-center">
+    <img src="{{ SITEURL }}/images/header.png" alt="PyData Roma Logo" class="img-fluid">
+    <div class="mt-4">
+        <a href="{{ MEETUP_LINK }}" class="btn btn-roma me-3">Join our Meetup</a>
+        <a href="{{ CFP_LINK }}" class="btn btn-roma">Propose a talk</a>
+    </div>
+</header>
+
+<!-- Social block -->
+<section class="social-strip text-center py-5">
+    <div class="container">
+        <!-- <h4 class="text-center mb-4">All our contacts:</h4> -->
+
+
+        <div class="d-flex justify-content-center flex-wrap gap-4">
+            <a class="social-link" href="https://t.me/pydata-roma-capitale" aria-label="Telegram">
+                <i class="bi bi-telegram"></i>
+            </a>
+
+            <a class="social-link" href="https://github.com/pydata" aria-label="GitHub">
+                <i class="bi bi-github"></i>
+            </a>
+
+            <a class="social-link" href="https://www.meetup.com/pydata-roma-capitale" aria-label="Meetup">
+                <img src="{{ SITEURL }}/images/meetup.svg" alt="" class="icon-img">
+            </a>
+
+            <a class="social-link" href="https://www.linkedin.com/company/pydata-roma" aria-label="LinkedIn">
+                <i class="bi bi-linkedin"></i>
+            </a>
+        </div>
+    </div>
+
+</section>
+
+<!-- About – global PyData -->
+<section id="about" class="about-strip py-5">
+    <div class="container">
+        <h2 class="fw-bold mb-3">PyData</h2>
+
+        <p>
+            <strong>PyData</strong> is an educational program of
+            <a href="https://numfocus.org" target="_blank" rel="noopener">NumFOCUS</a>,
+            a 501(c)(3) non‑profit dedicated to sustainable open‑source. PyData gives
+            users and developers of data‑analysis tools a forum to learn and share.
+        </p>
+
+        <p>
+            The global PyData network discusses best practices, new approaches, and
+            emerging tech for data management, analytics, and visualisation—using
+            languages such as Python, Julia and R.
+        </p>
+
+        <p class="mb-0">
+            The event follows the
+            <a href="https://pydataconf.global/coc" target="_blank" rel="noopener">
+                PyData Code of Conduct</a>. Concerns?
+            Call NumFOCUS ED Leah Silen (+1 512‑222‑5449) or e‑mail
+            <a href="mailto:leah@numfocus.org">leah@numfocus.org</a>.
+        </p>
+    </div>
+</section>
+
+<!-- About – local chapter -->
+<section class="about-roma-strip py-5">
+    <div class="container">
+        <h2 class="fw-bold mb-3">PyData Roma Capitale</h2>
+
+        <p>
+            This is the Rome chapter of PyData, a community for everyone who loves Python, data, or meeting with tech
+            fellows.
+
+            Our goal is to create an inclusive environment where people can connect, share their work, and exchange
+            ideas on tackling evolving challenges in AI, data science, engineering, research, and industry applications.
+            We are passionate about open-source tools and collaborative learning, bringing together enthusiasts and
+            professionals from diverse backgrounds.
+        </p>
+
+        <ul class="list-unstyled mb-4">
+            <li>• Share practical know‑how in data science &amp; ML</li>
+            <li>• Promote open‑source and ethical data practices</li>
+            <li>• Connect pros, students, researchers &amp; hobbyists</li>
+        </ul>
+
+        <p class="mb-0">
+            <a href="https://www.meetup.com/pydata-roma-capitale" target="_blank"
+               rel="noopener">Join our Meetup</a>,
+            propose a talk in the
+            <a href="https://forms.gle/nrXLNhDJcdCyvkrY8" target="_blank"
+               rel="noopener">CFP</a>,
+            or chat on
+            <a href="https://t.me/pydataroma" target="_blank"
+               rel="noopener">Telegram</a>.
+            Ci vediamo al prossimo evento!
+        </p>
+    </div>
+</section>
+
+<!-- Board block -->
+<section id="board" class="board-strip py-5">
+  <div class="container">
+    <h2 class="fw-bold text-center mb-5">Our Board</h2>
+
+    <div class="row justify-content-center g-4">
+      {% for m in BOARD_MEMBERS %}
+        <div class="col-6 col-sm-4 col-md-3">
+          <div class="card text-center h-100 shadow-sm border-0">
+            <a href="{{ m.linkedin }}" target="_blank" rel="noopener" class="d-block">
+              <img src="{{ m.photo }}" alt="{{ m.name }}"
+                   class="board-photo rounded-circle mx-auto mt-4">
+            </a>
+            <div class="card-body">
+              <h5 class="card-title mb-1">{{ m.name }}</h5>
+              <p class="small text-uppercase text-muted mb-2">{{ m.role }}</p>
+              <p class="small mb-0">{{ m.tagline }}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Upcoming events -->
+<section id="event" class="strip py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Upcoming Events</h2>
+        <div class="row justify-content-center">
+            {% set events = [] %}
+            {% for article in articles %}
+            {% if article.tags and 'event' in article.tags %}
+            {% set _ = events.append(article) %}
+            {% endif %}
+            {% endfor %}
+            {% if events %}
+            {% for article in events %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ article.title }}</h5>
+                        <p class="card-text">{{ article.summary }}</p>
+                    </div>
+                    <div class="card-footer text-muted small">
+                        {{ article.date.strftime("%B %-d, %Y") }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p class="text-center">No upcoming events right now—stay tuned!</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="{{ DEFAULT_LANG }}">
+<head>
+    <meta charset="utf-8">
+    <title>{% if page and page.title %}{{ page.title }} · {% endif %}{{ SITENAME }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="{{ SITEURL }}/theme/css/style.css" rel="stylesheet">
+    <link rel="icon" href="{{ SITEURL }}/favicon.ico">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-light shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fw-bold text-uppercase" href="{{ SITEURL }}/">{{ SITENAME }}</a>
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="nav">
+            <ul class="navbar-nav ms-auto">
+                {% for title, url in MENUITEMS %}
+                <li class="nav-item"><a class="nav-link" href="{{ url }}">{{ title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</nav>
+{% block content %}{% endblock %}
+<footer class="py-4 bg-dark text-white">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+        <!-- copyright -->
+        <p class="mb-0">© {{ now().year }} {{ SITENAME }}</p>
+
+        <!-- socials -->
+        <div class="d-flex gap-3">
+            {% for name, url in SOCIAL %}
+            {% if name == "Telegram" %}
+            <a class="social-link" href="{{ url }}" aria-label="Telegram"><i class="bi bi-telegram"></i></a>
+            {% elif name == "GitHub" %}
+            <a class="social-link" href="{{ url }}" aria-label="GitHub"><i class="bi bi-github"></i></a>
+            {% elif name == "LinkedIn" %}
+            <a class="social-link" href="{{ url }}" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            {% elif name == "Meetup" %}
+            <a class="social-link" href="{{ url }}" aria-label="Meetup">
+                <img src="{{ SITEURL }}/images/meetup.svg" alt="" class="icon-img">
+            </a>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ SITEURL }}/theme/js/main.js"></script>
+</body>
+</html>
