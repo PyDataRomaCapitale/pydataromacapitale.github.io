@@ -1,44 +1,55 @@
 name: Build & Deploy Pelican site
+
 on:
   push:
-    branches: [main]        # build on every push to main
-  workflow_dispatch:        # manual trigger button
+    branches: [main]
+  workflow_dispatch:
+
+# ── give the default token write rights ─────────────────────
+permissions:
+  contents: write        # allow push to gh-pages
+  pages: write           # (not strictly needed but nice for future)
+  id-token: write        # enables OIDC if you later switch to the Pages API
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    # work inside the site folder so Pelican finds its configs
     defaults:
       run:
         shell: bash
-        working-directory: pydata_roma_website
+        working-directory: pydata_roma_website   # ⚑ adjust if you rename the folder
 
     steps:
-    - name: Check out source
-      uses: actions/checkout@v4
+    # 1 ▸ Checkout
+    - uses: actions/checkout@v4
 
-    # Optional: speed up installs with uv – comment out if you stick to pip
+    # 2 ▸ Install uv
     - name: Install uv
       run: pip install uv
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
+    # 3 ▸ Set up Python
+    - uses: actions/setup-python@v5
       with:
         python-version: '3.11'
 
+    # 4 ▸ Install dependencies
     - name: Install deps
-      run: |
-        uv sync
+      run: uv pip install -r requirements.txt     # or `uv sync`
 
+    # 5 ▸ Build the site
     - name: Build site with Pelican
       run: |
         uv run pelican content \
                --settings publishconf.py \
-               --output output
+               --output   output
 
-    - name: Deploy to GitHub Pages
+    # 6 ▸ Deploy to GitHub Pages
+    - name: Deploy to gh-pages
       uses: peaceiris/actions-gh-pages@v4
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}   # now has write perms
         publish_branch: gh-pages
-        publish_dir: pydata_roma_website/output   # same folder as build step
-        enable_jekyll: false                      # drops a .nojekyll file
+        publish_dir: pydata_roma_website/output     # path relative to repo root
+        enable_jekyll: false                        # drops a .nojekyll file
