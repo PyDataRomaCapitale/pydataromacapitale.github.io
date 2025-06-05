@@ -24,7 +24,7 @@ BOARD_MEMBERS = [
         "photo": "https://media.licdn.com/dms/image/v2/D4D03AQHCMh5hj5iD7g/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1719858096827?e=1752710400&v=beta&t=45zukI7MfRElWsuogfNCgFtx5mOGoXuuDZAVaCOUVWk",
         "linkedin": "https://www.linkedin.com/in/egon-ferri/",
         "role": "Organizer",
-        "tagline": "CVEngineer@Immobiliare.it",
+        "tagline": "CV Engineer @ Immobiliare.it",
     },
     {
         "name": "Carmela Salandria",
@@ -38,7 +38,7 @@ BOARD_MEMBERS = [
         "photo": "https://media.licdn.com/dms/image/v2/D4D03AQG7zQIGoOAtNg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1689435365433?e=1752710400&v=beta&t=fgVFRkk8lN3a7jJpikA-eooKhvQFgOqZJWrh7lkrpsE",
         "linkedin": "https://www.linkedin.com/in/vincenzoventriglia/",
         "role": "Organizer",
-        "tagline": "Machine Learning Engineer, Data Scientist & Analyst",
+        "tagline": "ML Engineer & Data Scientist @ INGV",
     },
 ]
 
