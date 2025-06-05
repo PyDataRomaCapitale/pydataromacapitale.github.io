@@ -7,6 +7,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: pydata_roma_website
 
     steps:
     - name: Check out source
@@ -31,9 +35,10 @@ jobs:
                --settings publishconf.py \
                --output output
 
-    - name: Deploy to gh-pages
+    - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_branch: gh-pages
-        publish_dir: output
-        # pushes as github-actions bot
+        publish_dir: pydata_roma_website/output   # same folder as build step
+        enable_jekyll: false                      # drops a .nojekyll file
