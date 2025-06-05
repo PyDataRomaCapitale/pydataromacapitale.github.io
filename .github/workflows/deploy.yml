@@ -27,7 +27,7 @@ jobs:
 
     - name: Build site with Pelican
       run: |
-        pelican content \
+        uv run pelican content \
                --settings publishconf.py \
                --output output
 
