@@ -133,3 +133,10 @@ footer .social-link {
 }
 .board-photo:hover { transform: scale(1.05); }
 
+/* narrow text blocks */
+.page-description {
+  max-width: 42ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
