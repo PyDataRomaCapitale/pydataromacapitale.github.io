@@ -2,7 +2,7 @@
 
 > Static site powered by **[Pelican](https://getpelican.com/)**, deployed on **GitHub Pages**.
 
-* **ProductionURL**: [https://pydataromacapitale.github.io/website/](https://pydataromacapitale.github.io/website/)
+* **ProductionURL**: [https://pydataromacapitale.github.io](https://pydataromacapitale.github.io)
 * **Sourcecode**: `main`branch (this repo)
 * **Builtsite**: `gh-pages`branch (published automatically)
 
