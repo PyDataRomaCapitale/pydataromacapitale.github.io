@@ -6,6 +6,7 @@ Needs:  pip install requests ics pytz
 """
 from __future__ import annotations
 import os, re, datetime as dt, tempfile, shutil
+import logging
 import requests, pytz
 from ics import Calendar, Event
 from pelican import signals
@@ -29,8 +30,23 @@ def slugify(text: str) -> str:
     return slug_pat.sub("-", text.lower()).strip("-")
 
 def fetch_events(group: str) -> dict[str, Event]:
-    ics_text = requests.get(ICS_URL.format(group=group), timeout=10).text
-    cal = Calendar(ics_text)
+    """Return upcoming events for the given Meetup group.
+
+    In case the remote request fails (e.g. due to lack of network
+    connectivity), an empty dictionary is returned and the error is
+    logged instead of raising an exception.  This keeps the site build
+    from aborting when the feed is temporarily unreachable.
+    """
+
+    url = ICS_URL.format(group=group)
+    try:
+        resp = requests.get(url, timeout=10)
+        resp.raise_for_status()
+    except requests.RequestException as exc:
+        logging.warning("Could not fetch Meetup events: %s", exc)
+        return {}
+
+    cal = Calendar(resp.text)
     now = dt.datetime.now(pytz.UTC)
     return {ev.uid: ev for ev in cal.events if ev.begin > now}
 
