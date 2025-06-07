@@ -35,6 +35,7 @@ body {
     font-weight: 600;
     background: var(--roma-orange);
     color: #fff;
+    text-decoration: none;
     border: none;
     transition: background-color .3s ease;
 }
