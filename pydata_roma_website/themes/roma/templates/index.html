@@ -16,21 +16,25 @@
 
 
         <div class="d-flex justify-content-center flex-wrap gap-4">
-            <a class="social-link" href="https://t.me/pydata-roma-capitale" aria-label="Telegram">
+            {% for name, url in SOCIAL %}
+            {% if name == "Telegram" %}
+            <a class="social-link" href="{{ url }}" aria-label="Telegram">
                 <i class="bi bi-telegram"></i>
             </a>
-
-            <a class="social-link" href="https://github.com/pydata" aria-label="GitHub">
+            {% elif name == "GitHub" %}
+            <a class="social-link" href="{{ url }}" aria-label="GitHub">
                 <i class="bi bi-github"></i>
             </a>
-
-            <a class="social-link" href="https://www.meetup.com/pydata-roma-capitale" aria-label="Meetup">
+            {% elif name == "Meetup" %}
+            <a class="social-link" href="{{ url }}" aria-label="Meetup">
                 <img src="{{ SITEURL }}/images/meetup.svg" alt="" class="icon-img">
             </a>
-
-            <a class="social-link" href="https://www.linkedin.com/company/pydata-roma" aria-label="LinkedIn">
+            {% elif name == "LinkedIn" %}
+            <a class="social-link" href="{{ url }}" aria-label="LinkedIn">
                 <i class="bi bi-linkedin"></i>
             </a>
+            {% endif %}
+            {% endfor %}
         </div>
     </div>
 
