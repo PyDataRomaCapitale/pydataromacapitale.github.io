@@ -21,7 +21,7 @@ MENUITEMS = [
 BOARD_MEMBERS = [
     {
         "name": "Egon Ferri",
-        "photo": "https://media.licdn.com/dms/image/v2/D4D03AQHCMh5hj5iD7g/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1719858096827?e=1752710400&v=beta&t=45zukI7MfRElWsuogfNCgFtx5mOGoXuuDZAVaCOUVWk",
+        "photo": "https://media.licdn.com/dms/image/v2/D4D03AQFsaWSiEKPu6w/profile-displayphoto-shrink_800_800/B4DZdLGfZoH4Ag-/0/1749311683005?e=1755129600&v=beta&t=UtH8tmsltsf-vpSTAm49JbCho1fmUFxS7bBSMuQF3zI",
         "linkedin": "https://www.linkedin.com/in/egon-ferri/",
         "role": "Organizer",
         "tagline": "CV Engineer @ Immobiliare.it",
