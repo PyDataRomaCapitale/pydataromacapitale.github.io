@@ -113,18 +113,18 @@
 
     <div class="row justify-content-center g-4">
       {% for m in BOARD_MEMBERS %}
-        <div class="col-6 col-sm-4 col-md-3">
-          <div class="card text-center h-100 shadow-sm border-0">
-            <a href="{{ m.linkedin }}" target="_blank" rel="noopener" class="d-block">
+        <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+          <a href="{{ m.linkedin }}" target="_blank" rel="noopener" class="board-card-link">
+            <div class="card text-center h-100 shadow-sm border-0">
               <img src="{{ m.photo }}" alt="{{ m.name }}"
                    class="board-photo rounded-circle mx-auto mt-4">
-            </a>
-            <div class="card-body">
-              <h5 class="card-title mb-1">{{ m.name }}</h5>
-              <p class="small text-uppercase text-muted mb-2">{{ m.role }}</p>
-              <p class="small mb-0">{{ m.tagline }}</p>
+              <div class="card-body">
+                <h5 class="card-title mb-1">{{ m.name }}</h5>
+                <p class="small text-uppercase text-muted mb-2">{{ m.role }}</p>
+                <p class="small mb-0">{{ m.tagline }}</p>
+              </div>
             </div>
-          </div>
+          </a>
         </div>
       {% endfor %}
     </div>
@@ -146,7 +146,7 @@
             {% endfor %}
             {% if events %}
             {% for article in events %}
-            <div class="col-md-6 col-lg-4 mb-4">
+            <div class="col-sm-12 col-md-6 col-lg-5 col-xl-4 mb-4">
                 <div class="card h-100 shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title">{{ article.title }}</h5>
