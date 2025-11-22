@@ -200,6 +200,9 @@ body {
     gap: 0.75rem;
     margin-bottom: 1.25rem;
     color: #f3f7fc;
+    justify-content: center;
+    text-align: center;
+    flex-direction: row;
 }
 
 .section-heading .dot {
@@ -212,6 +215,7 @@ body {
 
 .section-heading h2 {
     margin: 0;
+    text-align: inherit;
 }
 
 .section-lead {
@@ -452,6 +456,13 @@ footer .social-link {
 .board-strip {
   background: transparent;
   color: #e9f0f6;
+  padding: 3rem 0;
+}
+
+.board-strip h2,
+#event h2 {
+  text-align: center;
+  width: 100%;
 }
 
 /* board card link wrapper */
@@ -599,7 +610,7 @@ section {
   .navbar-brand {
     font-size: 1.2rem;
   }
-  
+
   .btn-roma {
     font-size: 1.1rem;
     padding: 0.65rem 1.25rem;
@@ -627,6 +638,10 @@ section {
   
   .hero-image {
     padding: 3.5rem 0 2.5rem;
+  }
+  
+  .hero-visual {
+    margin-top: 3rem;
   }
   
   .hero-grid {
@@ -715,6 +730,10 @@ section {
   
   .hero-image {
     padding: 3rem 0 2rem;
+  }
+  
+  .hero-visual {
+    margin-top: 4rem;
   }
   
   .navbar-brand {
