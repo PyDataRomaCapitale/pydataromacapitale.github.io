@@ -19,8 +19,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const updateParallaxSizing = () => {
         const viewportWidth = window.innerWidth || root.clientWidth;
         const viewportHeight = window.innerHeight || root.clientHeight;
-        const isMobile = viewportWidth <= 768;
-        const targetTopRatio = isMobile ? 0.12 : 0.05; // keep skylines higher on mobile
+        const containerHeight = parallaxBackground?.getBoundingClientRect().height || viewportHeight;
+        const horizonRatio = parseFloat(
+            getComputedStyle(parallaxBackground || root).getPropertyValue('--horizon-ratio')
+        ) || 0.58;
+        const horizonPosition = containerHeight * horizonRatio;
 
         const maxScale = layers.length
             ? layers.reduce((max, layer) => Math.max(max, layer.scale), 1)
@@ -29,17 +32,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const target = parallaxBackground || root;
         target.style.setProperty('--parallax-base-width', `${baseWidth}px`);
 
-        const heightScale = viewportHeight / 1080;
-        const minOffset = -viewportHeight * (isMobile ? 0.25 : 0.18);
-
         layers.forEach(layer => {
-            layer.offsetPx = (layer.baseOffset + layer.lift) * heightScale;
             const layerHeight = baseWidth * layer.scale * SKYLINE_ASPECT;
-            const targetTop = viewportHeight * targetTopRatio;
-            const offset = Math.max(
-                minOffset,
-                targetTop + layerHeight - viewportHeight + (layer.lift * heightScale)
-            );
+            const baseOffset = (layer.baseOffset || 0) + (layer.lift || 0);
+            const offset = horizonPosition + baseOffset - containerHeight + (layerHeight / 2);
+            layer.offsetPx = offset;
             layer.el.style.setProperty('--layer-offset', `${offset}px`);
         });
     };

@@ -83,11 +83,12 @@ body {
 
 .parallax-background {
     --parallax-base-width: 100vw;
+    --horizon-ratio: 0.58;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 120vh;
     z-index: -1;
     background:
         radial-gradient(circle at 18% 18%, var(--roma-sun), rgba(231, 111, 0, 0)),
@@ -110,6 +111,7 @@ body {
     --layer-scale: 1;
     --layer-offset: -20vh;
     position: absolute;
+    top: 5rem;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -124,7 +126,9 @@ body {
 
 .layer-sky {
     background: linear-gradient(180deg, var(--roma-night) 0%, var(--roma-dawn) 30%, var(--roma-sky) 68%, var(--roma-haze) 100%);
-    background-size: 100% 130%;
+    position: absolute;
+    top: 0;
+    background-size: 100% 160%;
     animation: skyDrift 38s ease-in-out infinite alternate;
     opacity: 1;
 }
@@ -875,6 +879,7 @@ section {
     .layer-1 { --layer-scale: 0.98; }
     .layer-2 { --layer-scale: 1; }
     .layer-3 { --layer-scale: 1; }
+    .parallax-background { --horizon-ratio: 0.7; }
 }
 
 /* Very small screens: full-bleed cards */
