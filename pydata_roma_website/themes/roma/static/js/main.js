@@ -165,6 +165,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const viewportHeight = window.innerHeight || root.clientHeight;
         const scrollY = window.scrollY || window.pageYOffset;
         const snapPadding = getScrollPadding();
+        if (scrollY <= snapPadding + 10) {
+            activeIndex = 0;
+            updateSnapUI();
+            activeRaf = null;
+            return;
+        }
         const reference = scrollY + viewportHeight * 0.45;
 
         let closestIdx = activeIndex;
@@ -243,7 +249,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const snapUI = createSnapControls();
 
     if (snapUI) {
+        activeIndex = 0;
+        updateActiveSection();
         updateSnapUI();
+        window.requestAnimationFrame(updateActiveSection);
     }
 
     prefersReducedMotion.addEventListener('change', event => {
