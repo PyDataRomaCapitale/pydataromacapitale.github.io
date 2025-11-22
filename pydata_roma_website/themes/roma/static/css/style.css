@@ -80,6 +80,7 @@ body {
 }
 
 .parallax-background {
+    --parallax-base-width: 100vw;
     position: fixed;
     top: 0;
     left: 0;
@@ -104,13 +105,16 @@ body {
 }
 
 .parallax-layer {
+    --layer-scale: 1;
+    --layer-offset: -20vh;
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-repeat: repeat-x;
-    background-position: bottom center;
+    background-repeat: no-repeat;
+    background-position: center calc(100% + var(--layer-offset));
+    background-size: calc(var(--parallax-base-width) * var(--layer-scale)) auto;
     will-change: transform;
     transform-origin: center bottom;
     transition: filter .6s ease, opacity .6s ease;
@@ -124,36 +128,32 @@ body {
 }
 
 .layer-0 {
+    --layer-scale: 0.94;
     background-image: url('../images/skyline-0.svg');
-    background-size: 230vw auto;
-    background-position: center calc(100% + 8vh);
     opacity: 0.12;
     filter: grayscale(1) saturate(0.35) brightness(1.12) hue-rotate(-10deg);
     animation: skylineSway 30s ease-in-out infinite alternate;
 }
 
 .layer-1 {
+    --layer-scale: 0.96;
     background-image: url('../images/skyline-1.svg');
-    background-size: 210vw auto;
-    background-position: center calc(100% + 8vh);
     opacity: 1;
     filter: grayscale(1) saturate(0.7) brightness(1.08) hue-rotate(-6deg);
     animation: skylineSway 32s ease-in-out infinite alternate-reverse;
 }
 
 .layer-2 {
+    --layer-scale: 0.98;
     background-image: url('../images/skyline-2.svg');
-    background-size: 192vw auto;
-    background-position: center calc(100% + 8vh);
     opacity: 1;
     filter: grayscale(0.1) saturate(0.9) brightness(1.03) hue-rotate(-2deg) drop-shadow(0 12px 20px rgba(0, 0, 0, 0.22));
     animation: skylineSway 34s ease-in-out infinite alternate;
 }
 
 .layer-3 {
+    --layer-scale: 1;
     background-image: url('../images/skyline-3.svg');
-    background-size: 180vw auto;
-    background-position: center calc(100% + 8vh);
     opacity: 1;
     filter: saturate(1) brightness(1.02) drop-shadow(0 18px 26px rgba(0, 0, 0, 0.28));
     animation: skylineSway 36s ease-in-out infinite alternate-reverse;
@@ -846,10 +846,11 @@ section {
 
 /* Mobile Parallax Adjustments */
 @media (max-width: 768px) {
-    .layer-0 { background-size: 280vw auto; background-position: center calc(100% - 2vh); }
-    .layer-1 { background-size: 255vw auto; background-position: center calc(100% - 1vh); }
-    .layer-2 { background-size: 235vw auto; background-position: center 100%; }
-    .layer-3 { background-size: 215vw auto; background-position: center calc(100% + 1vh); }
+    .parallax-layer { --layer-offset: -14vh; }
+    .layer-0 { --layer-scale: 0.96; }
+    .layer-1 { --layer-scale: 0.98; }
+    .layer-2 { --layer-scale: 1; }
+    .layer-3 { --layer-scale: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
