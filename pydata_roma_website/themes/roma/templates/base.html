@@ -22,7 +22,10 @@
 </div>
 <nav class="navbar navbar-expand-lg bg-light shadow-sm">
     <div class="container">
-        <a class="navbar-brand fw-bold text-uppercase" href="{{ SITEURL }}/">{{ SITENAME }}</a>
+        <a class="navbar-brand fw-bold text-uppercase" href="{{ SITEURL }}/" title="{{ SITENAME }}">
+            <img src="{{ SITEURL }}/theme/images/logos/cube_logo.svg" alt="PyData" class="brand-logo" aria-hidden="true">
+            <img src="{{ SITEURL }}/theme/images/logos/snake_logo.svg" alt="{{ SITENAME }}" class="brand-logo" aria-hidden="true">
+        </a>
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
             <span class="navbar-toggler-icon"></span>
         </button>

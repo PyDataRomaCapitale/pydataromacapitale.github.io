@@ -38,10 +38,26 @@
     letter-spacing: -0.01em;
     color: #f4f7fb !important;
     transition: color .2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.brand-logo {
+    width: auto;
+    height: 3rem;
+    display: block;
+    filter: drop-shadow(0 4px 10px rgba(231, 111, 0, 0.16));
+    transition: filter .2s ease, transform .2s ease;
 }
 
 .navbar-brand:hover {
     color: var(--roma-orange) !important;
+}
+
+.navbar-brand:hover .brand-logo {
+    filter: drop-shadow(0 8px 16px rgba(231, 111, 0, 0.32));
+    transform: translateY(-1px);
 }
 
 .nav-link {
@@ -83,7 +99,7 @@ body {
 
 .parallax-background {
     --parallax-base-width: 100vw;
-    --horizon-ratio: 0.58;
+    --horizon-ratio: 0.63;
     position: fixed;
     top: 0;
     left: 0;
@@ -325,6 +341,39 @@ body {
     backdrop-filter: blur(12px);
 }
 
+.hero-visual .logo-visual {
+    background: var(--roma-beige);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+}
+
+.logo-stack {
+    position: relative;
+    width: min(480px, 85vw);
+    margin: 0 auto;
+    padding: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.logo-stack .main-logo {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.hero-title-logo {
+    margin: 0 0 1rem;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.hero-title-logo .main-logo {
+    width: min(420px, 82vw);
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.18));
+    margin: 0;
+}
+
 .hero-visual img {
     width: 100%;
     height: auto;
@@ -361,6 +410,7 @@ body {
 .social-strip {
     background: transparent;
     color: #e9f1f6;
+    margin-top: 2%;
 }
 
 /* square icon buttons */
@@ -644,6 +694,14 @@ section {
     padding: 3.5rem 0 2.5rem;
   }
   
+  .hero-title-logo {
+    justify-content: center;
+  }
+
+  .hero-title-logo .main-logo {
+    margin: 0 auto;
+  }
+  
   .hero-visual {
     margin-top: 3rem;
   }
@@ -736,6 +794,14 @@ section {
     padding: 3rem 0 2rem;
   }
   
+  .hero-title-logo {
+    justify-content: center;
+  }
+
+  .hero-title-logo .main-logo {
+    margin: 0 auto;
+  }
+
   .hero-visual {
     margin-top: 4rem;
   }

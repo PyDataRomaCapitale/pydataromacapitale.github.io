@@ -4,7 +4,9 @@
 <header class="hero-image">
     <div class="container hero-grid">
         <div class="hero-copy">
-            <h1 class="display-5 fw-bold">PyData Roma&nbsp;Capitale</h1>
+            <h1 class="hero-title-logo">
+                <img src="{{ SITEURL }}/theme/images/logos/pydata_roma_capitale_logo.svg" alt="PyData Roma Capitale" class="main-logo">
+            </h1>
             <p class="lead">
                 A collaborative space for Pythonistas, data scientists, ML engineers, researchers, and curious minds to learn,
                 share, and build together in Rome.
@@ -14,9 +16,11 @@
                 <a href="{{ CFP_LINK }}" class="btn btn-roma">Propose a talk</a>
             </div>
         </div>
-        <div class="hero-visual">
-            <div class="floating-visual">
-                <img src="{{ SITEURL }}/images/header.png" alt="PyData Roma Logo" class="img-fluid">
+        <div class="hero-visual" hidden>
+            <div class="floating-visual logo-visual">
+                <div class="logo-stack" aria-hidden="true">
+                    <img src="{{ SITEURL }}/theme/images/logos/pydata_logo.svg" alt="PyData Roma Capitale" class="main-logo">
+                </div>
             </div>
         </div>
     </div>
