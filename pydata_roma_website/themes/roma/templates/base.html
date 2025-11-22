@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <title>{% if page and page.title %}{{ page.title }} · {% endif %}{{ SITENAME }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="{{ SITEURL }}/theme/css/style.css" rel="stylesheet">
@@ -11,11 +14,11 @@
 </head>
 <body>
 <div class="parallax-background">
-    <div class="parallax-layer layer-sky" data-speed="0.006"></div>
-    <div class="parallax-layer layer-0" data-speed="0.015"></div>
-    <div class="parallax-layer layer-1" data-speed="0.03"></div>
-    <div class="parallax-layer layer-2" data-speed="0.05"></div>
-    <div class="parallax-layer layer-3" data-speed="0.08"></div>
+    <div class="parallax-layer layer-sky" data-speed="0.006" data-offset="0"></div>
+    <div class="parallax-layer layer-0" data-speed="0.015" data-offset="480"></div>
+    <div class="parallax-layer layer-1" data-speed="0.03" data-offset="480"></div>
+    <div class="parallax-layer layer-2" data-speed="0.05" data-offset="480"></div>
+    <div class="parallax-layer layer-3" data-speed="0.08" data-offset="480"></div>
 </div>
 <nav class="navbar navbar-expand-lg bg-light shadow-sm">
     <div class="container">

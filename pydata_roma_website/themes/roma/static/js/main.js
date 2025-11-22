@@ -1,7 +1,11 @@
 // custom JS here
 document.addEventListener('DOMContentLoaded', function() {
     const layers = Array.from(document.querySelectorAll('.parallax-layer[data-speed]'))
-        .map(el => ({ el, speed: parseFloat(el.dataset.speed) || 0 }))
+        .map(el => ({
+            el,
+            speed: parseFloat(el.dataset.speed) || 0,
+            baseOffset: parseFloat(el.dataset.offset) || 0
+        }))
         .filter(layer => layer.speed > 0);
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -15,8 +19,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const updateLayers = () => {
         const scrollY = window.scrollY || window.pageYOffset;
 
-        layers.forEach(({ el, speed }) => {
-            el.style.transform = `translate3d(0, ${-scrollY * speed}px, 0)`;
+        layers.forEach(({ el, speed, baseOffset }) => {
+            const offset = (baseOffset - scrollY * speed);
+            el.style.transform = `translate3d(0, ${offset}px, 0)`;
         });
 
         ticking = false;
