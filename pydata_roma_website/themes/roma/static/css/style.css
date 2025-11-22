@@ -70,6 +70,7 @@
 html {
     overscroll-behavior: none;
     background: transparent;
+    overflow-x: hidden;
 }
 
 body {
@@ -77,6 +78,7 @@ body {
     font-family: 'Manrope', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     color: #e8edf3;
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
 .parallax-background {
@@ -474,6 +476,8 @@ footer .social-link {
   color: #e8edf3;
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
+  border-radius: 18px;
+  margin: 0 0.4rem;
 }
 
 .board-strip .card-title {
@@ -815,6 +819,7 @@ section {
   .board-strip .card {
     flex-direction: row;
     align-items: center;
+    padding: 0.2rem 1rem;
   }
   
   .board-strip .card a {
@@ -851,6 +856,33 @@ section {
     .layer-1 { --layer-scale: 0.98; }
     .layer-2 { --layer-scale: 1; }
     .layer-3 { --layer-scale: 1; }
+}
+
+/* Very small screens: full-bleed cards */
+@media (max-width: 540px) {
+    .content {
+        max-width: none;
+    }
+    .social-strip .container,
+    .about-strip .container,
+    .about-roma-strip .container,
+    .board-strip .container,
+    #event .container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .floating-card {
+        width: 100vw;
+        margin: 0 calc(-50vw + 50%);
+        border-radius: 0;
+        border-left: 0;
+        border-right: 0;
+        padding: 1.4rem 1.15rem;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.32);
+    }
+    .floating-card::after {
+        border-radius: 0;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
