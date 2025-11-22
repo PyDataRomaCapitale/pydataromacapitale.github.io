@@ -20,53 +20,53 @@ MENUITEMS = [
 
 BOARD_MEMBERS = [
     {
-        "name": "Egon",
+        "name": "Egon Ferri",
         "photo": f"{SITEURL}/images/people/Egon.jpg",
-        "linkedin": "#",
-        "role": "Board Member",
-        "tagline": "Update description",
+        "linkedin": "https://www.linkedin.com/in/egon-ferri/",
+        "role": "Organizer",
+        "tagline": "CV Engineer @ Immobiliare.it",
     },
     {
-        "name": "Vincenzo",
+        "name": "Vincenzo Ventriglia",
         "photo": f"{SITEURL}/images/people/Vincenzo.jpg",
         "linkedin": "https://www.linkedin.com/in/vincenzoventriglia/",
         "role": "Organizer",
         "tagline": "ML Engineer & Data Scientist @ INGV",
     },
     {
-        "name": "Carmela",
+        "name": "Carmela Salandria",
         "photo": f"{SITEURL}/images/people/Carmela.jpg",
-        "linkedin": "#",
-        "role": "Board Member",
-        "tagline": "Update description",
+        "linkedin": "https://www.linkedin.com/in/carmela-salandr%C3%ACa-843162178/",
+        "role": "Organizer",
+        "tagline": "Data Engineer @ ELIS Innovation Hub ",
     },
     {
-        "name": "Francesco",
+        "name": "Francesco Conti",
         "photo": f"{SITEURL}/images/people/Francesco.jpg",
-        "linkedin": "#",
-        "role": "Board Member",
-        "tagline": "Update description",
+        "linkedin": "https://www.linkedin.com/in/francesco-conti-32913b135/",
+        "role": "Organizer",
+        "tagline": "Data Scientist @ Agile lab",
     },
     {
-        "name": "Carlo",
+        "name": "Carlo A. Venditti",
         "photo": f"{SITEURL}/images/people/Carlo.jpg",
         "linkedin": "#",
-        "role": "Board Member",
-        "tagline": "Update description",
+        "role": "Organizer",
+        "tagline": "Freelance Software Engineer",
     },
     {
         "name": "Marco",
         "photo": f"{SITEURL}/images/people/Marco.jpg",
-        "linkedin": "#",
-        "role": "Board Member",
-        "tagline": "Update description",
+        "linkedin": "https://www.linkedin.com/in/marcosciacovelli/",
+        "role": "Organizer",
+        "tagline": "Data Platform Specialist @Verisure",
     },
     {
-        "name": "Vanessa",
+        "name": "Vanessa Iannozzi",
         "photo": f"{SITEURL}/images/people/Vanessa.jpg",
         "linkedin": "#",
-        "role": "Board Member",
-        "tagline": "Update description",
+        "role": "Organizer",
+        "tagline": "Data Scientist presso ELIS Innovation Hub",
     },
 ]
 
@@ -93,8 +93,6 @@ GOOGLE_ANALYTICS = ""
 STATIC_PATHS = ["images", "extra/favicon/favicon.ico"]
 
 # where to place extra files
-EXTRA_PATH_METADATA = {
-    "extra/favicon/favicon.ico": {"path": "favicon.ico"}
-}
+EXTRA_PATH_METADATA = {"extra/favicon/favicon.ico": {"path": "favicon.ico"}}
 
 DEFAULT_PAGINATION = False
