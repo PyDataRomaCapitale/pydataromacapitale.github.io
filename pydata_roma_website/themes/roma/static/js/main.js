@@ -1,16 +1,25 @@
 // custom JS here
 document.addEventListener('DOMContentLoaded', function() {
     const SKYLINE_ASPECT = 317.77332 / 666.69336; // height / width of skyline SVGs
+    const MOBILE_BREAKPOINT = 768;
+    const MOBILE_SPEED_MULTIPLIER = 0.4;
     const root = document.documentElement;
     const parallaxBackground = document.querySelector('.parallax-background');
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const snapSections = Array.from(document.querySelectorAll('.snap-section'));
+    const getScrollPadding = () => {
+        const bodyStyle = getComputedStyle(document.body);
+        return parseFloat(bodyStyle.scrollPaddingTop) || 0;
+    };
 
     const layers = Array.from(document.querySelectorAll('.parallax-layer[data-speed]'))
         .map(el => ({
             el,
+            baseSpeed: parseFloat(el.dataset.speed) || 0,
             speed: parseFloat(el.dataset.speed) || 0,
             baseOffset: parseFloat(el.dataset.offset) || 0,
             lift: parseFloat(el.dataset.lift) || 0,
+            tail: parseFloat(el.dataset.tail) || 0,
             scale: parseFloat(getComputedStyle(el).getPropertyValue('--layer-scale')) || 1,
             offsetPx: 0
         }))
@@ -19,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const updateParallaxSizing = () => {
         const viewportWidth = window.innerWidth || root.clientWidth;
         const viewportHeight = window.innerHeight || root.clientHeight;
+        const isMobile = viewportWidth <= MOBILE_BREAKPOINT;
         const containerHeight = parallaxBackground?.getBoundingClientRect().height || viewportHeight;
         const horizonRatio = parseFloat(
             getComputedStyle(parallaxBackground || root).getPropertyValue('--horizon-ratio')
@@ -33,9 +43,14 @@ document.addEventListener('DOMContentLoaded', function() {
         target.style.setProperty('--parallax-base-width', `${baseWidth}px`);
 
         layers.forEach(layer => {
+            layer.speed = layer.baseSpeed * (isMobile ? MOBILE_SPEED_MULTIPLIER : 1);
+        });
+
+        layers.forEach(layer => {
             const layerHeight = baseWidth * layer.scale * SKYLINE_ASPECT;
             const baseOffset = (layer.baseOffset || 0) + (layer.lift || 0);
-            const offset = horizonPosition + baseOffset - containerHeight + (layerHeight / 2);
+            const tail = layer.tail * ((viewportHeight || 1) / 900);
+            const offset = horizonPosition + baseOffset - containerHeight + (layerHeight / 2) + tail;
             layer.offsetPx = offset;
             layer.el.style.setProperty('--layer-offset', `${offset}px`);
         });
@@ -43,14 +58,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     updateParallaxSizing();
 
-    if (!layers.length || prefersReducedMotion.matches) {
-        return;
-    }
-
+    const parallaxEnabled = layers.length > 0 && !prefersReducedMotion.matches;
     let ticking = false;
     let resizeRaf = null;
+    let snapTimer = null;
+    let autoSnapping = false;
+    let activeIndex = 0;
+    let activeRaf = null;
 
     const updateLayers = () => {
+        if (!parallaxEnabled) {
+            ticking = false;
+            return;
+        }
         const scrollY = window.scrollY || window.pageYOffset;
 
         layers.forEach(({ el, speed, offsetPx }) => {
@@ -61,10 +81,64 @@ document.addEventListener('DOMContentLoaded', function() {
         ticking = false;
     };
 
+    const scrollToSection = (index) => {
+        if (!snapSections[index]) return;
+        const rect = snapSections[index].getBoundingClientRect();
+        const scrollY = window.scrollY || window.pageYOffset;
+        const snapPadding = getScrollPadding();
+        const targetTop = Math.max(0, rect.top + scrollY - snapPadding);
+        autoSnapping = true;
+        window.scrollTo({ top: targetTop, behavior: 'smooth' });
+        window.setTimeout(() => { autoSnapping = false; }, 520);
+    };
+
+    const snapToNearestSection = () => {
+        if (!snapSections.length || prefersReducedMotion.matches) {
+            return;
+        }
+
+        const viewportHeight = window.innerHeight || root.clientHeight;
+        const scrollY = window.scrollY || window.pageYOffset;
+        const snapPadding = getScrollPadding();
+        const reference = scrollY + viewportHeight * 0.4;
+        const snapDeadband = viewportHeight * 0.22;
+
+        let closestIdx = activeIndex;
+        let minDist = Infinity;
+
+        snapSections.forEach((section, idx) => {
+            const rect = section.getBoundingClientRect();
+            const top = rect.top + scrollY - snapPadding;
+            const dist = Math.abs(top - reference);
+            if (dist < minDist) {
+                minDist = dist;
+                closestIdx = idx;
+            }
+        });
+
+        if (!autoSnapping && minDist < snapDeadband) {
+            scrollToSection(closestIdx);
+        }
+    };
+
+    const scheduleSnap = () => {
+        if (!snapSections.length || prefersReducedMotion.matches || autoSnapping) {
+            return;
+        }
+        if (snapTimer) {
+            window.clearTimeout(snapTimer);
+        }
+        snapTimer = window.setTimeout(snapToNearestSection, 260);
+    };
+
     const onScroll = () => {
-        if (!ticking) {
+        if (parallaxEnabled && !ticking) {
             window.requestAnimationFrame(updateLayers);
             ticking = true;
+        }
+        scheduleSnap();
+        if (!activeRaf) {
+            activeRaf = window.requestAnimationFrame(updateActiveSection);
         }
     };
 
@@ -83,16 +157,105 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', onResize, { passive: true });
     updateLayers();
 
+    const updateActiveSection = () => {
+        if (!snapSections.length) {
+            activeRaf = null;
+            return;
+        }
+        const viewportHeight = window.innerHeight || root.clientHeight;
+        const scrollY = window.scrollY || window.pageYOffset;
+        const snapPadding = getScrollPadding();
+        const reference = scrollY + viewportHeight * 0.45;
+
+        let closestIdx = activeIndex;
+        let minDist = Infinity;
+
+        snapSections.forEach((section, idx) => {
+            const rect = section.getBoundingClientRect();
+            const top = rect.top + scrollY - snapPadding;
+            const dist = Math.abs(top - reference);
+            if (dist < minDist) {
+                minDist = dist;
+                closestIdx = idx;
+            }
+        });
+
+        if (closestIdx !== activeIndex) {
+            activeIndex = closestIdx;
+            updateSnapUI();
+        }
+        activeRaf = null;
+    };
+
+    // Snap-section reveal animations
+    if (snapSections.length && !prefersReducedMotion.matches) {
+        const reveal = (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('snap-visible');
+                } else {
+                    entry.target.classList.remove('snap-visible');
+                }
+            });
+        };
+        const observer = new IntersectionObserver(reveal, {
+            threshold: 0.35,
+            rootMargin: '-10% 0% -20% 0%'
+        });
+        snapSections.forEach(sec => observer.observe(sec));
+    } else {
+        snapSections.forEach(sec => sec.classList.add('snap-visible'));
+    }
+
+    // Snap controls (dots only)
+    const createSnapControls = () => {
+        if (snapSections.length <= 1) return null;
+
+        const control = document.createElement('div');
+        control.className = 'snap-controls';
+
+        const dotsWrap = document.createElement('div');
+        dotsWrap.className = 'snap-dots';
+
+        snapSections.forEach((section, idx) => {
+            const dot = document.createElement('button');
+            dot.className = 'snap-dot';
+            const label = section.dataset.title || section.querySelector('h2')?.textContent || `Section ${idx + 1}`;
+            dot.setAttribute('aria-label', label);
+            dot.setAttribute('title', label);
+            dot.addEventListener('click', () => scrollToSection(idx));
+            dotsWrap.appendChild(dot);
+        });
+
+        control.appendChild(dotsWrap);
+
+        document.body.appendChild(control);
+        return { control, dots: Array.from(dotsWrap.children) };
+    };
+
+    const updateSnapUI = () => {
+        if (!snapUI) return;
+        snapUI.dots.forEach((dot, idx) => {
+            dot.classList.toggle('active', idx === activeIndex);
+        });
+    };
+
+    const snapUI = createSnapControls();
+
+    if (snapUI) {
+        updateSnapUI();
+    }
+
     prefersReducedMotion.addEventListener('change', event => {
         if (event.matches) {
             layers.forEach(({ el }) => el.style.transform = '');
-            window.removeEventListener('scroll', onScroll);
-            window.removeEventListener('resize', onResize);
+            autoSnapping = false;
+            if (snapTimer) {
+                window.clearTimeout(snapTimer);
+            }
         } else {
             updateParallaxSizing();
             updateLayers();
-            window.addEventListener('scroll', onScroll, { passive: true });
-            window.addEventListener('resize', onResize, { passive: true });
         }
     });
 });

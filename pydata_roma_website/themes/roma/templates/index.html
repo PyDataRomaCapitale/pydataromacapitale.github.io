@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <!-- Hero -->
-<header class="hero-image">
+<header class="hero-image snap-section" data-title="Home">
     <div class="container hero-grid">
         <div class="hero-copy">
             <h1 class="hero-title-logo">
@@ -24,10 +24,13 @@
             </div>
         </div>
     </div>
+    <a class="scroll-cue" href="#stay-connected" aria-label="Scroll to next section">
+        <i class="bi bi-chevron-down"></i>
+    </a>
 </header>
 
 <!-- Social block -->
-<section class="social-strip text-center py-5">
+<section id="stay-connected" class="social-strip text-center py-5 snap-section" data-title="Stay connected">
     <div class="container floating-card">
         <div class="section-heading justify-content-center">
             <h2 class="fw-bold mb-0">Stay connected</h2>
@@ -59,7 +62,7 @@
 </section>
 
 <!-- About – global PyData -->
-<section id="about" class="about-strip text-center py-5">
+<section id="about" class="about-strip text-center py-5 snap-section" data-title="PyData">
     <div class="container floating-card">
         <div class="section-heading justify-content-center">
             <h2 class="fw-bold mb-0">PyData</h2>
@@ -90,7 +93,7 @@
 </section>
 
 <!-- About – local chapter -->
-<section class="about-roma-strip text-center py-5">
+<section class="about-roma-strip text-center py-5 snap-section" data-title="PyData Roma Capitale">
     <div class="container floating-card">
         <div class="section-heading justify-content-center">
             <h2 class="fw-bold mb-0">PyData Roma Capitale</h2>
@@ -129,7 +132,7 @@
 </section>
 
 <!-- Board block -->
-<section id="board" class="board-strip py-5">
+<section id="board" class="board-strip py-5 snap-section" data-title="Our Board">
   <div class="container floating-card">
     <h2 class="fw-bold text-center mb-5">Our Board</h2>
 
@@ -156,7 +159,7 @@
 
 
 <!-- Upcoming events -->
-<section id="event" class="strip py-5">
+<section id="event" class="strip py-5 snap-section" data-title="Upcoming Events">
     <div class="container floating-card">
         <h2 class="text-center mb-4">Upcoming Events</h2>
         <div class="row justify-content-center">

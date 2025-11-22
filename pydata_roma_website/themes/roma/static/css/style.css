@@ -24,9 +24,11 @@
 /* Navbar enhancements */
 .navbar {
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.24) !important;
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 1000;
+  left: 0;
+  width: 100%;
+  z-index: 1200;
   background: linear-gradient(
     120deg,
     rgba(10, 22, 36, 0.82),
@@ -91,6 +93,7 @@ html {
   overscroll-behavior: none;
   background: transparent;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -100,11 +103,14 @@ body {
   color: #e8edf3;
   line-height: 1.6;
   overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: 80px;
+  padding-top: 80px;
 }
 
 .parallax-background {
   --parallax-base-width: 100vw;
-  --horizon-ratio: 0.63;
+  --horizon-ratio: 0.74;
   position: fixed;
   top: 0;
   left: 0;
@@ -213,6 +219,96 @@ body {
   max-width: 1400px;
   margin: 0 auto;
   background: transparent;
+}
+
+.snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.snap-section .floating-card {
+  width: 100%;
+}
+
+.snap-section.snap-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.snap-section:last-of-type {
+  min-height: calc(100vh - 240px);
+  scroll-snap-stop: normal;
+}
+
+.board-strip.snap-section {
+  scroll-snap-stop: normal;
+  min-height: auto;
+  padding-top: clamp(2rem, 4vw, 3rem);
+  padding-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.snap-controls {
+  position: fixed;
+  right: clamp(0.35rem, 2vw, 0.9rem);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  z-index: 1250;
+  pointer-events: none;
+}
+
+.snap-controls button {
+  pointer-events: auto;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(9, 18, 30, 0.72);
+  color: rgba(232, 237, 243, 0.9);
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  box-shadow: none;
+}
+
+.snap-dots {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.snap-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  transition: transform 0.2s ease, background 0.2s ease, border 0.2s ease;
+  padding: 0;
+}
+
+.snap-dot.active {
+  transform: scale(1.2);
+  background: var(--roma-orange);
+  border-color: var(--roma-orange);
+}
+
+@media (max-width: 768px) {
+  .snap-controls {
+    display: none;
+  }
 }
 
 .floating-card {
@@ -427,6 +523,39 @@ body {
   display: block;
   border-radius: 18px;
   filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.24));
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 1.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 1.6rem;
+  width: 2.6rem;
+  height: 2.6rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(9, 18, 30, 0.55);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+  animation: cueBounce 2.4s ease-in-out infinite;
+}
+
+.scroll-cue:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.scroll-cue i {
+  line-height: 1;
+}
+
+@keyframes cueBounce {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, 8px); }
 }
 
 /* primary CTA buttons */
@@ -775,6 +904,30 @@ section {
 
 /* Mobile devices (max-width: 768px) */
 @media (max-width: 768px) {
+  body {
+    scroll-snap-type: y mandatory;
+    scroll-padding-top: 68px;
+  }
+  .snap-controls {
+    right: 0.35rem;
+    top: auto;
+    bottom: 1rem;
+    transform: none;
+    flex-direction: row;
+    gap: 0.35rem;
+  }
+  .snap-dots {
+    flex-direction: row;
+  }
+  .snap-controls button {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+  .snap-dot {
+    width: 5px;
+    height: 5px;
+  }
+
   section {
     padding: 3rem 0;
   }
@@ -875,6 +1028,10 @@ section {
 
 /* Small mobile devices (max-width: 576px) */
 @media (max-width: 576px) {
+  body {
+    scroll-padding-top: 62px;
+  }
+
   section {
     padding: 2.5rem 0;
   }
@@ -1048,7 +1205,7 @@ section {
     --layer-scale: 1;
   }
   .parallax-background {
-    --horizon-ratio: 0.7;
+    --horizon-ratio: 0.81;
   }
 }
 
@@ -1080,10 +1237,20 @@ section {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .parallax-layer {
-    animation: none !important;
-    transform: none !important;
-  }
+    .parallax-layer {
+        animation: none !important;
+        transform: none !important;
+    }
+
+    body {
+        scroll-behavior: auto;
+        scroll-snap-type: none;
+    }
+
+    .snap-section {
+        opacity: 1 !important;
+        transform: none !important;
+    }
 }
 
 @keyframes skyDrift {
