@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
             activeRaf = null;
             return;
         }
-        const reference = scrollY + viewportHeight * 0.45;
+        const reference = scrollY + viewportHeight * 0.1;
 
         let closestIdx = activeIndex;
         let minDist = Infinity;
@@ -249,7 +249,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const snapUI = createSnapControls();
 
     if (snapUI) {
-        activeIndex = 0;
+        // Handle initial hash navigation
+        if (window.location.hash) {
+            const targetId = window.location.hash.substring(1);
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                const idx = snapSections.indexOf(targetSection);
+                if (idx !== -1) {
+                    activeIndex = idx;
+                    // Defer the scroll slightly to override browser default if needed
+                    // or just let the updateActiveSection catch it.
+                    // But to be safe and ensure alignment:
+                    window.setTimeout(() => scrollToSection(idx), 100);
+                }
+            }
+        } else {
+            activeIndex = 0;
+        }
+
         updateActiveSection();
         updateSnapUI();
         window.requestAnimationFrame(updateActiveSection);
