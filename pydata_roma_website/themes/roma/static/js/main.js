@@ -272,23 +272,43 @@ document.addEventListener('DOMContentLoaded', function() {
         window.requestAnimationFrame(updateActiveSection);
     }
 
-    // Handle scroll cue click without hash change
-    const scrollCue = document.querySelector('.scroll-cue');
-    if (scrollCue) {
-        scrollCue.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = scrollCue.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-            if (targetSection) {
-                const idx = snapSections.indexOf(targetSection);
-                if (idx !== -1) {
-                    scrollToSection(idx);
-                } else {
-                    targetSection.scrollIntoView({ behavior: 'smooth' });
-                }
+    // Create section navigation (up/down chevrons)
+    const createSectionNavigation = () => {
+        if (snapSections.length <= 1) return;
+
+        snapSections.forEach((section, idx) => {
+            // Down button (for all except last section)
+            if (idx < snapSections.length - 1) {
+                const downBtn = document.createElement('div');
+                downBtn.className = 'section-nav down';
+                if (idx > 0) downBtn.classList.add('nav-minimal');
+                downBtn.setAttribute('role', 'button');
+                downBtn.setAttribute('aria-label', 'Next section');
+                downBtn.innerHTML = '<i class="bi bi-chevron-down"></i>';
+                downBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    scrollToSection(idx + 1);
+                });
+                section.appendChild(downBtn);
+            }
+
+            // Up button (for all except first section)
+            if (idx > 0) {
+                const upBtn = document.createElement('div');
+                upBtn.className = 'section-nav up nav-minimal';
+                upBtn.setAttribute('role', 'button');
+                upBtn.setAttribute('aria-label', 'Previous section');
+                upBtn.innerHTML = '<i class="bi bi-chevron-up"></i>';
+                upBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    scrollToSection(idx - 1);
+                });
+                section.appendChild(upBtn);
             }
         });
-    }
+    };
+
+    createSectionNavigation();
 
     prefersReducedMotion.addEventListener('change', event => {
         if (event.matches) {
