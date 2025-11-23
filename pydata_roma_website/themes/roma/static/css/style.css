@@ -991,6 +991,10 @@ section {
     justify-content: center !important;
   }
 
+  .scroll-cue {
+    bottom: -2.2rem;
+  }
+
   .hero-tags {
     justify-content: center;
   }
