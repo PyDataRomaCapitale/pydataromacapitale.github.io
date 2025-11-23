@@ -96,6 +96,18 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Hide scrollbar on desktop (since we have indicators) */
+@media (min-width: 769px) {
+  html {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  html::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 body {
   background: transparent !important;
   font-family: "Manrope", "Inter", system-ui, -apple-system, BlinkMacSystemFont,
