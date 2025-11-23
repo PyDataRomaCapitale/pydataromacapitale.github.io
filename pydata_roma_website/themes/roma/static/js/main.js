@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function() {
             dot.className = 'snap-dot';
             const label = section.dataset.title || section.querySelector('h2')?.textContent || `Section ${idx + 1}`;
             dot.setAttribute('aria-label', label);
-            dot.setAttribute('title', label);
+            // dot.setAttribute('title', label); // Removed to use custom CSS label
             dot.addEventListener('click', () => scrollToSection(idx));
             dotsWrap.appendChild(dot);
         });

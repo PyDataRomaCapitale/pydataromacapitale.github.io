@@ -270,39 +270,64 @@ body {
 
 .snap-controls button {
   pointer-events: auto;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(9, 18, 30, 0.72);
-  color: rgba(232, 237, 243, 0.9);
-  width: 1.3rem;
-  height: 1.3rem;
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
+  border: none;
+  background: transparent;
+  width: auto;
+  min-width: 40px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   padding: 0;
   box-shadow: none;
+  position: relative;
+  cursor: pointer;
+}
+
+/* The visible line */
+.snap-controls button::after {
+  content: "";
+  display: block;
+  width: 12px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.3);
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+/* The text label */
+.snap-controls button::before {
+  content: attr(aria-label);
+  color: rgba(232, 237, 243, 0.8);
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-right: 12px;
+  opacity: 0;
+  transform: translateX(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.snap-controls button:hover::after {
+  background: rgba(255, 255, 255, 0.6);
+  width: 18px;
+}
+
+.snap-controls button:hover::before {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .snap-dots {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   gap: 0.25rem;
 }
 
-.snap-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  background: rgba(255, 255, 255, 0.08);
-  transition: transform 0.2s ease, background 0.2s ease, border 0.2s ease;
-  padding: 0;
-}
-
-.snap-dot.active {
-  transform: scale(1.2);
+.snap-dot.active::after {
   background: var(--roma-orange);
-  border-color: var(--roma-orange);
+  width: 24px;
 }
 
 @media (max-width: 768px) {
