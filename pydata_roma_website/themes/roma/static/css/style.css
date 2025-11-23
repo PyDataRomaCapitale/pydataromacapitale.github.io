@@ -99,10 +99,10 @@ html {
 /* Hide scrollbar on desktop (since we have indicators) */
 @media (min-width: 769px) {
   html {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
-  
+
   html::-webkit-scrollbar {
     display: none;
   }
@@ -183,6 +183,14 @@ body {
     var(--roma-dawn) 30%,
     var(--roma-sky) 68%,
     var(--roma-haze) 100%
+
+    /*
+    A variant gradient more similar to the mobile one
+    var(--roma-night) 0%,
+    var(--roma-dawn) 10%,
+    var(--roma-sky) 45%,
+    var(--roma-haze) 50%
+    */
   );
   position: absolute;
   top: 0;
@@ -601,8 +609,13 @@ body {
 }
 
 @keyframes cueBounce {
-  0%, 100% { transform: translate(-50%, 0); }
-  50% { transform: translate(-50%, 8px); }
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, 8px);
+  }
 }
 
 /* primary CTA buttons */
@@ -1258,6 +1271,16 @@ section {
   .parallax-background {
     --horizon-ratio: 0.81;
   }
+
+  .layer-sky {
+    background: linear-gradient(
+      180deg,
+      var(--roma-night) 0%,
+      var(--roma-dawn) 30%,
+      var(--roma-sky) 75%,
+      var(--roma-haze) 95%
+    );
+  }
 }
 
 /* Very small screens: full-bleed cards */
@@ -1288,20 +1311,20 @@ section {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .parallax-layer {
-        animation: none !important;
-        transform: none !important;
-    }
+  .parallax-layer {
+    animation: none !important;
+    transform: none !important;
+  }
 
-    body {
-        scroll-behavior: auto;
-        scroll-snap-type: none;
-    }
+  body {
+    scroll-behavior: auto;
+    scroll-snap-type: none;
+  }
 
-    .snap-section {
-        opacity: 1 !important;
-        transform: none !important;
-    }
+  .snap-section {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 @keyframes skyDrift {
