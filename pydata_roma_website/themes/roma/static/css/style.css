@@ -593,6 +593,8 @@ body {
   background: rgba(9, 18, 30, 0.55);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
   animation: cueBounce 2.4s ease-in-out infinite;
+  z-index: 100;
+  cursor: pointer;
 }
 
 .scroll-cue:hover {
