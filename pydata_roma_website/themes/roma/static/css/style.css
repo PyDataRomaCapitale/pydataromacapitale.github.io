@@ -960,20 +960,9 @@ section {
 
 /* Mobile devices (max-width: 768px) */
 @media (max-width: 768px) {
-  html,
   body {
-    scroll-snap-type: none !important;
-  }
-
-  body {
+    scroll-snap-type: y mandatory;
     scroll-padding-top: 68px;
-  }
-
-  .snap-section {
-    opacity: 1 !important;
-    transform: none !important;
-    scroll-snap-align: none;
-    transition: none;
   }
   .snap-controls {
     right: 0.35rem;
@@ -1304,8 +1293,9 @@ section {
     padding-right: 0;
   }
   .floating-card {
-    width: 100vw;
-    margin: 0 calc(-50vw + 50%);
+    width: 100%;
+    max-width: none;
+    margin: 0;
     border-radius: 0;
     border-left: 0;
     border-right: 0;
