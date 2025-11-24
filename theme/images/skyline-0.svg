@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg1"
+   width="666.69336"
+   height="317.77332"
+   viewBox="0 0 666.69336 317.77332"
+   sodipodi:docname="skyline-0.svg"
+   inkscape:version="1.4.2 (ebf0e940, 2025-05-08)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.0914625"
+     inkscape:cx="311.96674"
+     inkscape:cy="169.03925"
+     inkscape:window-width="1512"
+     inkscape:window-height="920"
+     inkscape:window-x="0"
+     inkscape:window-y="34"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g2"
+     showgrid="false">
+    <inkscape:page
+       x="0"
+       y="0"
+       inkscape:label="1"
+       id="page1"
+       width="666.69336"
+       height="317.77332"
+       margin="0"
+       bleed="0" />
+    <inkscape:grid
+       id="grid1"
+       units="px"
+       originx="0"
+       originy="0"
+       spacingx="1"
+       spacingy="1"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="5"
+       enabled="true"
+       visible="false" />
+  </sodipodi:namedview>
+  <g
+     id="g1"
+     inkscape:groupmode="layer"
+     inkscape:label="1">
+    <g
+       id="group-R5">
+      <g
+         id="g4"
+         transform="translate(-1.25e-6,-174.67366)">
+        <g
+           id="g3">
+          <g
+             id="g2">
+            <path
+               id="path2"
+               d="m 306.62092,269.56325 h -29.23398 v 64.94529 h 29.23398 v -64.94529"
+               style="fill:#d5e9f4;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.0910835" />
+            <path
+               id="path3"
+               d="m 342.00292,284.39154 h -21.19083 v 50.117 h 21.19083 v -50.117"
+               style="fill:#d5e9f4;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.0910835" />
+            <path
+               id="path4"
+               d="m 458.50928,298.03286 h -21.19189 v 36.47568 h 21.19189 v -36.47568"
+               style="fill:#d5e9f4;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.0910835" />
+            <path
+               id="path5"
+               d="m 504.82297,288.24359 h -27.83554 v 46.26495 h 27.83554 v -46.26495"
+               style="fill:#d5e9f4;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.0910835" />
+            <path
+               id="path6"
+               d="m 559.38447,304.84262 h -27.83554 v 35.82576 h 27.83554 v -35.82576"
+               style="fill:#d5e9f4;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.0910835" />
+            <path
+               id="path7"
+               d="m 662.42313,305.64699 h -83.75066 v 30.684 h 83.75066 v -30.684"
+               style="fill:#d5e9f4;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.133333" />
+            <path
+               id="path8"
+               d="m 469.99737,277.99509 h -21.19189 v 62.68653 h 21.19189 v -62.68653"
+               style="fill:#d5e9f4;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.0910835" />
+            <path
+               id="path146"
+               d="M 666.68047,529.09504 H 0.01289548 V 333.56032 H 666.68047 v 195.53472"
+               style="fill:#d5e9f4;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.415519" />
+          </g>
+        </g>
+        <path
+           id="path146-5"
+           d="M 662.65468,354.42138 H -4.0128932 V 333.56032 H 662.65468 v 20.86106"
+           style="fill:#d5e9f4;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.135721" />
+      </g>
+    </g>
+  </g>
+</svg>

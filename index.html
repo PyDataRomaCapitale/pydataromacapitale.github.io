@@ -4,15 +4,28 @@
     <meta charset="utf-8">
     <title>PyData Roma Capitale</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="https://pydataroma.python.it/theme/css/style.css" rel="stylesheet">
     <link rel="icon" href="https://pydataroma.python.it/favicon.ico">
 </head>
 <body>
+<div class="parallax-background">
+    <div class="parallax-layer layer-sky" data-speed="0.003" data-offset="0"></div>
+    <div class="parallax-layer layer-0" data-speed="0.0075" data-offset="0"></div>
+    <div class="parallax-layer layer-1" data-speed="0.015" data-offset="0"></div>
+    <div class="parallax-layer layer-2" data-speed="0.025" data-offset="0"></div>
+    <div class="parallax-layer layer-3" data-speed="0.04" data-offset="0" data-lift="-7"></div>
+</div>
 <nav class="navbar navbar-expand-lg bg-light shadow-sm">
     <div class="container">
-        <a class="navbar-brand fw-bold text-uppercase" href="https://pydataroma.python.it/">PyData Roma Capitale</a>
+        <a class="navbar-brand fw-bold text-uppercase" href="https://pydataroma.python.it/" title="PyData Roma Capitale">
+            <img src="https://pydataroma.python.it/theme/images/logos/cube_logo.svg" alt="PyData" class="brand-logo" aria-hidden="true">
+            <img src="https://pydataroma.python.it/theme/images/logos/snake_logo.svg" alt="PyData Roma Capitale" class="brand-logo" aria-hidden="true">
+        </a>
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -25,20 +38,42 @@
         </div>
     </div>
 </nav>
+<div class="content">
 <!-- Hero -->
-<header class="hero-image text-center">
-    <img src="https://pydataroma.python.it/images/header.png" alt="PyData Roma Logo" class="img-fluid">
-    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-4">
-        <a href="https://www.meetup.com/pydata-roma-capitale" class="btn btn-roma">Join our Meetup</a>
-        <a href="https://forms.gle/nrXLNhDJcdCyvkrY8" class="btn btn-roma">Propose a talk</a>
+<header class="hero-image snap-section" data-title="Home">
+    <div class="container hero-grid">
+        <div class="hero-copy">
+            <h1 class="hero-title-logo">
+                <img src="https://pydataroma.python.it/theme/images/logos/pydata_roma_capitale_logo.svg" alt="PyData Roma Capitale" class="main-logo">
+            </h1>
+            <p class="lead">
+                A collaborative space for Pythonistas, data scientists, ML engineers, researchers, and curious minds to learn,
+                share, and build together in Rome.
+            </p>
+            <div class="d-grid d-sm-flex hero-actions">
+                <a href="https://www.meetup.com/pydata-roma-capitale" class="btn btn-roma">Join our Meetup</a>
+                <a href="https://forms.gle/nrXLNhDJcdCyvkrY8" class="btn btn-roma">Propose a talk</a>
+            </div>
+        </div>
+        <div class="hero-visual" hidden>
+            <div class="floating-visual logo-visual">
+                <div class="logo-stack" aria-hidden="true">
+                    <img src="https://pydataroma.python.it/theme/images/logos/pydata_logo.svg" alt="PyData Roma Capitale" class="main-logo">
+                </div>
+            </div>
+        </div>
     </div>
+    <a class="scroll-cue" href="#stay-connected" aria-label="Scroll to next section">
+        <i class="bi bi-chevron-down"></i>
+    </a>
 </header>
 
 <!-- Social block -->
-<section class="social-strip text-center py-5">
-    <div class="container">
-        <!-- <h4 class="text-center mb-4">All our contacts:</h4> -->
-
+<section id="stay-connected" class="social-strip text-center py-5 snap-section" data-title="Stay connected">
+    <div class="container floating-card">
+        <div class="section-heading justify-content-center">
+            <h2 class="fw-bold mb-0">Stay connected</h2>
+        </div>
 
         <div class="d-flex justify-content-center flex-wrap gap-4">
             <a class="social-link" href="https://t.me/pydataroma" aria-label="Telegram">
@@ -59,10 +94,12 @@
 </section>
 
 <!-- About – global PyData -->
-<section id="about" class="about-strip text-center py-5">
-    <div class="container">
-        <h2 class="fw-bold mb-3">PyData</h2>
-        <div class="page-description">
+<section id="about" class="about-strip text-center py-5 snap-section" data-title="PyData">
+    <div class="container floating-card">
+        <div class="section-heading justify-content-center">
+            <h2 class="fw-bold mb-0">PyData</h2>
+        </div>
+        <div class="page-description section-lead">
             <p>
                 <strong>PyData</strong> is an educational program of
                 <a href="https://numfocus.org" target="_blank" rel="noopener">NumFOCUS</a>,
@@ -88,10 +125,12 @@
 </section>
 
 <!-- About – local chapter -->
-<section class="about-roma-strip text-center py-5">
-    <div class="container">
-        <h2 class="fw-bold mb-3">PyData Roma Capitale</h2>
-        <div class="page-description">
+<section class="about-roma-strip text-center py-5 snap-section" data-title="PyData Roma Capitale">
+    <div class="container floating-card">
+        <div class="section-heading justify-content-center">
+            <h2 class="fw-bold mb-0">PyData Roma Capitale</h2>
+        </div>
+        <div class="page-description section-lead">
             <p>
                 This is the Rome chapter of PyData, a community for everyone who loves Python, data, or meeting with tech
                 fellows.
@@ -125,49 +164,101 @@
 </section>
 
 <!-- Board block -->
-<section id="board" class="board-strip py-5">
-  <div class="container">
+<section id="board" class="board-strip py-5 snap-section" data-title="Our Board">
+  <div class="container floating-card">
     <h2 class="fw-bold text-center mb-5">Our Board</h2>
 
     <div class="row justify-content-center g-4">
-        <div class="col-6 col-sm-4 col-md-3">
-          <div class="card text-center h-100 shadow-sm border-0">
-            <a href="https://www.linkedin.com/in/egon-ferri/" target="_blank" rel="noopener" class="d-block">
-              <img src="https://media.licdn.com/dms/image/v2/D4D03AQFsaWSiEKPu6w/profile-displayphoto-shrink_800_800/B4DZdLGfZoH4Ag-/0/1749311683005?e=1755129600&v=beta&t=UtH8tmsltsf-vpSTAm49JbCho1fmUFxS7bBSMuQF3zI" alt="Egon Ferri"
+        <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+          <a href="https://www.linkedin.com/in/egon-ferri/" target="_blank" rel="noopener" class="board-card-link">
+            <div class="card text-center h-100 shadow-sm border-0">
+              <img src="http://localhost:8000/images/people/Egon.jpg" alt="Egon Ferri"
                    class="board-photo rounded-circle mx-auto mt-4">
-            </a>
-            <div class="card-body">
-              <h5 class="card-title mb-1">Egon Ferri</h5>
-              <p class="small text-uppercase text-muted mb-2">Organizer</p>
-              <p class="small mb-0">CV Engineer @ Immobiliare.it</p>
+              <div class="card-body">
+                <h5 class="card-title mb-1">Egon Ferri</h5>
+                <p class="small text-uppercase text-secondary mb-2">Organizer</p>
+                <p class="small mb-0">CV Engineer @ Immobiliare.it</p>
+              </div>
             </div>
-          </div>
+          </a>
         </div>
-        <div class="col-6 col-sm-4 col-md-3">
-          <div class="card text-center h-100 shadow-sm border-0">
-            <a href="https://www.linkedin.com/in/carmela-salandr%C3%ACa-843162178/" target="_blank" rel="noopener" class="d-block">
-              <img src="https://media.licdn.com/dms/image/v2/D4E03AQEiqgoMnc6EGA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1669741594156?e=1752710400&v=beta&t=8OLrev9-axaKDFdyFKkeFWqdfSrKP-bxyXAObxD6x_c" alt="Carmela Salandria"
+        <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+          <a href="https://www.linkedin.com/in/vincenzoventriglia/" target="_blank" rel="noopener" class="board-card-link">
+            <div class="card text-center h-100 shadow-sm border-0">
+              <img src="http://localhost:8000/images/people/Vincenzo.jpg" alt="Vincenzo Ventriglia"
                    class="board-photo rounded-circle mx-auto mt-4">
-            </a>
-            <div class="card-body">
-              <h5 class="card-title mb-1">Carmela Salandria</h5>
-              <p class="small text-uppercase text-muted mb-2">Organizer</p>
-              <p class="small mb-0">Data Engineer @ ELIS Innovation Hub </p>
+              <div class="card-body">
+                <h5 class="card-title mb-1">Vincenzo Ventriglia</h5>
+                <p class="small text-uppercase text-secondary mb-2">Organizer</p>
+                <p class="small mb-0">ML Engineer & Data Scientist @ INGV</p>
+              </div>
             </div>
-          </div>
+          </a>
         </div>
-        <div class="col-6 col-sm-4 col-md-3">
-          <div class="card text-center h-100 shadow-sm border-0">
-            <a href="https://www.linkedin.com/in/vincenzoventriglia/" target="_blank" rel="noopener" class="d-block">
-              <img src="https://media.licdn.com/dms/image/v2/D4D03AQG7zQIGoOAtNg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1689435365433?e=1752710400&v=beta&t=fgVFRkk8lN3a7jJpikA-eooKhvQFgOqZJWrh7lkrpsE" alt="Vincenzo Ventriglia"
+        <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+          <a href="https://www.linkedin.com/in/carmela-salandr%C3%ACa-843162178/" target="_blank" rel="noopener" class="board-card-link">
+            <div class="card text-center h-100 shadow-sm border-0">
+              <img src="http://localhost:8000/images/people/Carmela.jpg" alt="Carmela Salandria"
                    class="board-photo rounded-circle mx-auto mt-4">
-            </a>
-            <div class="card-body">
-              <h5 class="card-title mb-1">Vincenzo Ventriglia</h5>
-              <p class="small text-uppercase text-muted mb-2">Organizer</p>
-              <p class="small mb-0">ML Engineer & Data Scientist @ INGV</p>
+              <div class="card-body">
+                <h5 class="card-title mb-1">Carmela Salandria</h5>
+                <p class="small text-uppercase text-secondary mb-2">Organizer</p>
+                <p class="small mb-0">Data Engineer @ ELIS Innovation Hub </p>
+              </div>
             </div>
-          </div>
+          </a>
+        </div>
+        <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+          <a href="https://www.linkedin.com/in/francesco-conti-32913b135/" target="_blank" rel="noopener" class="board-card-link">
+            <div class="card text-center h-100 shadow-sm border-0">
+              <img src="http://localhost:8000/images/people/Francesco.jpg" alt="Francesco Conti"
+                   class="board-photo rounded-circle mx-auto mt-4">
+              <div class="card-body">
+                <h5 class="card-title mb-1">Francesco Conti</h5>
+                <p class="small text-uppercase text-secondary mb-2">Organizer</p>
+                <p class="small mb-0">Data Scientist @ Agile lab</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+          <a href="#" target="_blank" rel="noopener" class="board-card-link">
+            <div class="card text-center h-100 shadow-sm border-0">
+              <img src="http://localhost:8000/images/people/Carlo.jpg" alt="Carlo A. Venditti"
+                   class="board-photo rounded-circle mx-auto mt-4">
+              <div class="card-body">
+                <h5 class="card-title mb-1">Carlo A. Venditti</h5>
+                <p class="small text-uppercase text-secondary mb-2">Organizer</p>
+                <p class="small mb-0">Freelance Software Engineer</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+          <a href="https://www.linkedin.com/in/marcosciacovelli/" target="_blank" rel="noopener" class="board-card-link">
+            <div class="card text-center h-100 shadow-sm border-0">
+              <img src="http://localhost:8000/images/people/Marco.jpg" alt="Marco"
+                   class="board-photo rounded-circle mx-auto mt-4">
+              <div class="card-body">
+                <h5 class="card-title mb-1">Marco</h5>
+                <p class="small text-uppercase text-secondary mb-2">Organizer</p>
+                <p class="small mb-0">Data Platform Specialist @Verisure</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+          <a href="#" target="_blank" rel="noopener" class="board-card-link">
+            <div class="card text-center h-100 shadow-sm border-0">
+              <img src="http://localhost:8000/images/people/Vanessa.jpg" alt="Vanessa Iannozzi"
+                   class="board-photo rounded-circle mx-auto mt-4">
+              <div class="card-body">
+                <h5 class="card-title mb-1">Vanessa Iannozzi</h5>
+                <p class="small text-uppercase text-secondary mb-2">Organizer</p>
+                <p class="small mb-0">Data Scientist presso ELIS Innovation Hub</p>
+              </div>
+            </div>
+          </a>
         </div>
     </div>
   </div>
@@ -176,8 +267,8 @@
 
 
 <!-- Upcoming events -->
-<section id="event" class="strip py-5">
-    <div class="container">
+<section id="event" class="strip py-5 snap-section" data-title="Upcoming Events">
+    <div class="container floating-card">
         <h2 class="text-center mb-4">Upcoming Events</h2>
         <div class="row justify-content-center">
             <p class="text-center">No upcoming events right now—stay tuned!</p>
@@ -185,6 +276,7 @@
     </div>
 </section>
 
+</div>
 <footer class="py-4 bg-dark text-white">
     <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
         <!-- copyright -->
