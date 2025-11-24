@@ -9,7 +9,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const snapSections = Array.from(document.querySelectorAll('.snap-section'));
     const getScrollPadding = () => {
         const bodyStyle = getComputedStyle(document.body);
-        return parseFloat(bodyStyle.scrollPaddingTop) || 0;
+        return parseFloat(bodyStyle.scrollPaddingTop) || 80;
+    };
+
+    const getSectionTop = (section) => {
+        let top = 0;
+        let el = section;
+        while (el) {
+            top += el.offsetTop;
+            el = el.offsetParent;
+        }
+        return top;
     };
 
     const layers = Array.from(document.querySelectorAll('.parallax-layer[data-speed]'))
@@ -83,10 +93,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const scrollToSection = (index) => {
         if (!snapSections[index]) return;
-        const rect = snapSections[index].getBoundingClientRect();
-        const scrollY = window.scrollY || window.pageYOffset;
         const snapPadding = getScrollPadding();
-        const targetTop = Math.max(0, rect.top + scrollY - snapPadding);
+        const targetTop = Math.max(0, getSectionTop(snapSections[index]) - snapPadding);
         autoSnapping = true;
         window.scrollTo({ top: targetTop, behavior: 'smooth' });
         window.setTimeout(() => { autoSnapping = false; }, 520);
@@ -107,8 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let minDist = Infinity;
 
         snapSections.forEach((section, idx) => {
-            const rect = section.getBoundingClientRect();
-            const top = rect.top + scrollY - snapPadding;
+            const top = getSectionTop(section) - snapPadding;
             const dist = Math.abs(top - reference);
             if (dist < minDist) {
                 minDist = dist;
@@ -177,8 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let minDist = Infinity;
 
         snapSections.forEach((section, idx) => {
-            const rect = section.getBoundingClientRect();
-            const top = rect.top + scrollY - snapPadding;
+            const top = getSectionTop(section) - snapPadding;
             const dist = Math.abs(top - reference);
             if (dist < minDist) {
                 minDist = dist;
@@ -270,6 +276,24 @@ document.addEventListener('DOMContentLoaded', function() {
         updateActiveSection();
         updateSnapUI();
         window.requestAnimationFrame(updateActiveSection);
+    }
+
+    // Handle scroll cue click without hash change
+    const scrollCue = document.querySelector('.scroll-cue');
+    if (scrollCue) {
+        scrollCue.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = scrollCue.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                const idx = snapSections.indexOf(targetSection);
+                if (idx !== -1) {
+                    scrollToSection(idx);
+                } else {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
     }
 
     prefersReducedMotion.addEventListener('change', event => {

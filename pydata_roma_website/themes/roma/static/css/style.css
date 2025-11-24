@@ -962,9 +962,24 @@ section {
 
 /* Mobile devices (max-width: 768px) */
 @media (max-width: 768px) {
+  html {
+    overscroll-behavior: auto;
+  }
+
+  html,
   body {
-    scroll-snap-type: y mandatory;
+    scroll-snap-type: none !important;
+  }
+
+  body {
     scroll-padding-top: 68px;
+  }
+
+  .snap-section {
+    opacity: 1 !important;
+    transform: none !important;
+    scroll-snap-align: none;
+    transition: none;
   }
   .snap-controls {
     right: 0.35rem;
