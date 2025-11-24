@@ -7,9 +7,9 @@ on:
 
 # ── give the default token write rights ─────────────────────
 permissions:
-  contents: write        # allow push to gh-pages
-  pages: write           # (not strictly needed but nice for future)
-  id-token: write        # enables OIDC if you later switch to the Pages API
+  contents: write # allow push to gh-pages
+  pages: write # (not strictly needed but nice for future)
+  id-token: write # enables OIDC if you later switch to the Pages API
 
 jobs:
   build:
@@ -19,37 +19,38 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: pydata_roma_website   # ⚑ adjust if you rename the folder
+        working-directory: pydata_roma_website # ⚑ adjust if you rename the folder
 
     steps:
-    # 1 ▸ Checkout
-    - uses: actions/checkout@v4
+      # 1 ▸ Checkout
+      - uses: actions/checkout@v4
 
-    # 2 ▸ Install uv
-    - name: Install uv
-      run: pip install uv
+      # 2 ▸ Install uv
+      - name: Install uv
+        run: pip install uv
 
-    # 3 ▸ Set up Python
-    - uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
+      # 3 ▸ Set up Python
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
 
-    # 4 ▸ Install dependencies
-    - name: Install deps
-      run: uv sync
+      # 4 ▸ Install dependencies
+      - name: Install deps
+        run: uv sync
 
-    # 5 ▸ Build the site
-    - name: Build site with Pelican
-      run: |
-        uv run pelican content \
-               --settings publishconf.py \
-               --output   output
+      # 5 ▸ Build the site
+      - name: Build site with Pelican
+        run: |
+          uv run pelican content \
+                 --settings publishconf.py \
+                 --output   output
 
-    # 6 ▸ Deploy to GitHub Pages
-    - name: Deploy to gh-pages
-      uses: peaceiris/actions-gh-pages@v4
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}   # now has write perms
-        publish_branch: gh-pages
-        publish_dir: pydata_roma_website/output     # path relative to repo root
-        enable_jekyll: false                        # drops a .nojekyll file
+      # 6 ▸ Deploy to GitHub Pages
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} # now has write perms
+          publish_branch: gh-pages
+          publish_dir: pydata_roma_website/output # path relative to repo root
+          cname: pydataroma.python.it
+          enable_jekyll: false # drops a .nojekyll file
