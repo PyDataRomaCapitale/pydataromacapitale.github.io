@@ -593,8 +593,6 @@ body {
   background: rgba(9, 18, 30, 0.55);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
   animation: cueBounce 2.4s ease-in-out infinite;
-  z-index: 100;
-  cursor: pointer;
 }
 
 .scroll-cue:hover {
@@ -962,9 +960,24 @@ section {
 
 /* Mobile devices (max-width: 768px) */
 @media (max-width: 768px) {
+  html {
+    overscroll-behavior: auto;
+  }
+
+  html,
   body {
-    scroll-snap-type: y mandatory;
+    scroll-snap-type: none !important;
+  }
+
+  body {
     scroll-padding-top: 68px;
+  }
+
+  .snap-section {
+    opacity: 1 !important;
+    transform: none !important;
+    scroll-snap-align: none;
+    transition: none;
   }
   .snap-controls {
     right: 0.35rem;
