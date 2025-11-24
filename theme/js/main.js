@@ -272,24 +272,6 @@ document.addEventListener('DOMContentLoaded', function() {
         window.requestAnimationFrame(updateActiveSection);
     }
 
-    // Handle scroll cue click without hash change
-    const scrollCue = document.querySelector('.scroll-cue');
-    if (scrollCue) {
-        scrollCue.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = scrollCue.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-            if (targetSection) {
-                const idx = snapSections.indexOf(targetSection);
-                if (idx !== -1) {
-                    scrollToSection(idx);
-                } else {
-                    targetSection.scrollIntoView({ behavior: 'smooth' });
-                }
-            }
-        });
-    }
-
     prefersReducedMotion.addEventListener('change', event => {
         if (event.matches) {
             layers.forEach(({ el }) => el.style.transform = '');
