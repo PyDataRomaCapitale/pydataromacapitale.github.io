@@ -123,7 +123,6 @@ body {
   color: #e8edf3;
   line-height: 1.6;
   overflow-x: hidden;
-  scroll-snap-type: y mandatory;
   scroll-padding-top: 80px;
   padding-top: 80px;
 }
@@ -274,38 +273,25 @@ body {
 }
 
 .snap-section {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  min-height: 100vh;
   display: flex;
   align-items: center;
-  padding-top: clamp(2.5rem, 5vw, 4rem);
-  padding-bottom: clamp(2.5rem, 5vw, 4rem);
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  padding-top: clamp(2rem, 4vw, 3rem);
+  padding-bottom: clamp(2rem, 4vw, 3rem);
 }
 
 .snap-section .floating-card {
   width: 100%;
 }
 
-.snap-section.snap-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 /* Only relax snap rules on the final section (events) */
 .content > .snap-section:last-child {
-  min-height: calc(100vh - 240px);
-  scroll-snap-stop: normal;
+  min-height: auto;
 }
 
 .board-strip.snap-section {
-  scroll-snap-stop: normal;
   min-height: auto;
-  padding-top: clamp(2rem, 4vw, 3rem);
-  padding-bottom: clamp(2rem, 4vw, 3rem);
+  padding-top: clamp(1.5rem, 3vw, 2rem);
+  padding-bottom: clamp(1.5rem, 3vw, 2rem);
 }
 
 .snap-controls {
@@ -473,7 +459,11 @@ body {
 .hero-image {
   position: relative;
   padding: 8rem 0 4.5rem;
-  top: -8.5rem;
+  margin-top: -80px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   color: #eef3f8;
 }
 
@@ -1042,7 +1032,7 @@ section {
   }
 
   .hero-image {
-    padding: 3.5rem 0 2.5rem;
+    padding: 6rem 0 2.5rem;
   }
 
   .hero-title-logo {
@@ -1150,7 +1140,7 @@ section {
   }
 
   .hero-image {
-    padding: 3rem 0 2rem;
+    padding: 5rem 0 2rem;
   }
 
   .hero-title-logo {
