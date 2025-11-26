@@ -259,7 +259,8 @@ body {
   transform: translateY(0);
 }
 
-.snap-section:last-of-type {
+/* Only relax snap rules on the final section (events) */
+.content > .snap-section:last-child {
   min-height: calc(100vh - 240px);
   scroll-snap-stop: normal;
 }
@@ -435,7 +436,8 @@ body {
 
 .hero-image {
   position: relative;
-  padding: 6rem 0 4.5rem;
+  padding: -4rem 0 4.5rem;
+  top: -8.5rem;
   color: #eef3f8;
 }
 
