@@ -13,13 +13,9 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     const getSectionTop = (section) => {
-        let top = 0;
-        let el = section;
-        while (el) {
-            top += el.offsetTop;
-            el = el.offsetParent;
-        }
-        return top;
+        // Use the viewport-relative position to avoid offsetParent quirks across layouts
+        const rect = section.getBoundingClientRect();
+        return (window.scrollY || window.pageYOffset) + rect.top;
     };
 
     const layers = Array.from(document.querySelectorAll('.parallax-layer[data-speed]'))
@@ -39,11 +35,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const viewportWidth = window.innerWidth || root.clientWidth;
         const viewportHeight = window.innerHeight || root.clientHeight;
         const isMobile = viewportWidth <= MOBILE_BREAKPOINT;
-        const containerHeight = parallaxBackground?.getBoundingClientRect().height || viewportHeight;
-        const horizonRatio = parseFloat(
-            getComputedStyle(parallaxBackground || root).getPropertyValue('--horizon-ratio')
-        ) || 0.58;
-        const horizonPosition = containerHeight * horizonRatio;
+        const containerRect = parallaxBackground?.getBoundingClientRect();
+        const containerHeight = containerRect?.height || viewportHeight;
+        const containerTop = containerRect?.top || 0;
+        
+        // Horizon at the bottom of the viewport
+        const horizonPosition = viewportHeight - containerTop - 100; // 100px adjustment for visual alignment
 
         const maxScale = layers.length
             ? layers.reduce((max, layer) => Math.max(max, layer.scale), 1)
@@ -83,8 +80,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         const scrollY = window.scrollY || window.pageYOffset;
 
-        layers.forEach(({ el, speed, offsetPx }) => {
-            const offset = (offsetPx - scrollY * speed);
+        layers.forEach(({ el, speed }) => {
+            const offset = (- scrollY * speed);
             el.style.transform = `translate3d(0, ${offset}px, 0)`;
         });
 
