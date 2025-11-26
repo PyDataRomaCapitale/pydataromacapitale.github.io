@@ -68,8 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const parallaxEnabled = layers.length > 0 && !prefersReducedMotion.matches;
     let ticking = false;
     let resizeRaf = null;
-    let snapTimer = null;
-    let autoSnapping = false;
     let activeIndex = 0;
     let activeRaf = null;
 
@@ -92,47 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!snapSections[index]) return;
         const snapPadding = getScrollPadding();
         const targetTop = Math.max(0, getSectionTop(snapSections[index]) - snapPadding);
-        autoSnapping = true;
         window.scrollTo({ top: targetTop, behavior: 'smooth' });
-        window.setTimeout(() => { autoSnapping = false; }, 520);
-    };
-
-    const snapToNearestSection = () => {
-        if (!snapSections.length || prefersReducedMotion.matches) {
-            return;
-        }
-
-        const viewportHeight = window.innerHeight || root.clientHeight;
-        const scrollY = window.scrollY || window.pageYOffset;
-        const snapPadding = getScrollPadding();
-        const reference = scrollY + viewportHeight * 0.4;
-        const snapDeadband = viewportHeight * 0.22;
-
-        let closestIdx = activeIndex;
-        let minDist = Infinity;
-
-        snapSections.forEach((section, idx) => {
-            const top = getSectionTop(section) - snapPadding;
-            const dist = Math.abs(top - reference);
-            if (dist < minDist) {
-                minDist = dist;
-                closestIdx = idx;
-            }
-        });
-
-        if (!autoSnapping && minDist < snapDeadband) {
-            scrollToSection(closestIdx);
-        }
-    };
-
-    const scheduleSnap = () => {
-        if (!snapSections.length || prefersReducedMotion.matches || autoSnapping) {
-            return;
-        }
-        if (snapTimer) {
-            window.clearTimeout(snapTimer);
-        }
-        snapTimer = window.setTimeout(snapToNearestSection, 260);
     };
 
     const onScroll = () => {
@@ -140,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function() {
             window.requestAnimationFrame(updateLayers);
             ticking = true;
         }
-        scheduleSnap();
         if (!activeRaf) {
             activeRaf = window.requestAnimationFrame(updateActiveSection);
         }
@@ -196,25 +153,25 @@ document.addEventListener('DOMContentLoaded', function() {
         activeRaf = null;
     };
 
-    // Snap-section reveal animations
-    if (snapSections.length && !prefersReducedMotion.matches) {
-        const reveal = (entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('snap-visible');
-                } else {
-                    entry.target.classList.remove('snap-visible');
-                }
-            });
-        };
-        const observer = new IntersectionObserver(reveal, {
-            threshold: 0.35,
-            rootMargin: '-10% 0% -20% 0%'
-        });
-        snapSections.forEach(sec => observer.observe(sec));
-    } else {
-        snapSections.forEach(sec => sec.classList.add('snap-visible'));
-    }
+    // Snap-section reveal animations - REMOVED
+    // if (snapSections.length && !prefersReducedMotion.matches) {
+    //     const reveal = (entries) => {
+    //         entries.forEach(entry => {
+    //             if (entry.isIntersecting) {
+    //                 entry.target.classList.add('snap-visible');
+    //             } else {
+    //                 entry.target.classList.remove('snap-visible');
+    //             }
+    //         });
+    //     };
+    //     const observer = new IntersectionObserver(reveal, {
+    //         threshold: 0.35,
+    //         rootMargin: '-10% 0% -20% 0%'
+    //     });
+    //     snapSections.forEach(sec => observer.observe(sec));
+    // } else {
+    //     snapSections.forEach(sec => sec.classList.add('snap-visible'));
+    // }
 
     // Snap controls (dots only)
     const createSnapControls = () => {
@@ -296,10 +253,6 @@ document.addEventListener('DOMContentLoaded', function() {
     prefersReducedMotion.addEventListener('change', event => {
         if (event.matches) {
             layers.forEach(({ el }) => el.style.transform = '');
-            autoSnapping = false;
-            if (snapTimer) {
-                window.clearTimeout(snapTimer);
-            }
         } else {
             updateParallaxSizing();
             updateLayers();
