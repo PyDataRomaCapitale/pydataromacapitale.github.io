@@ -267,7 +267,7 @@ body {
 .content {
   position: relative;
   z-index: 1;
-  max-width: 1400px;
+  max-width: 1000px;
   margin: 0 auto;
   background: transparent;
 }
@@ -275,8 +275,8 @@ body {
 .snap-section {
   display: flex;
   align-items: center;
-  padding-top: clamp(2rem, 4vw, 3rem);
-  padding-bottom: clamp(2rem, 4vw, 3rem);
+  padding-top: clamp(4rem, 5vw, 6rem);
+  padding-bottom: clamp(4rem, 5vw, 6rem);
 }
 
 .snap-section .floating-card {
@@ -427,7 +427,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
   color: #f3f7fc;
   justify-content: center;
   text-align: center;
