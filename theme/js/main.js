@@ -6,6 +6,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const root = document.documentElement;
     const parallaxBackground = document.querySelector('.parallax-background');
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    // Detect Android WebView — backdrop-filter, will-change and
+    // simultaneous CSS entry animations cause severe compositing
+    // flicker in WebViews.  Adding .webview-safe disables them.
+    const isAndroidWebView = (function () {
+        const ua = navigator.userAgent || '';
+        // "wv" token is the official Android WebView marker.
+        // Some apps use custom WebView variants without "wv", so
+        // also catch "Android" + no "Chrome/XX" (stripped by some
+        // WebViews) or the legacy "; wv)" pattern.
+        if (/\bwv\b/.test(ua)) return true;
+        if (/Android/.test(ua) && /Version\/[\d.]+/.test(ua) && !/Chrome\//.test(ua)) return true;
+        return false;
+    })();
+
+    if (isAndroidWebView || prefersReducedMotion.matches) {
+        root.classList.add('webview-safe');
+    }
     const snapSections = Array.from(document.querySelectorAll('.snap-section'));
     const getScrollPadding = () => {
         const bodyStyle = getComputedStyle(document.body);
@@ -65,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     updateParallaxSizing();
 
-    const parallaxEnabled = layers.length > 0 && !prefersReducedMotion.matches;
+    const parallaxEnabled = layers.length > 0 && !prefersReducedMotion.matches && !isAndroidWebView;
     let ticking = false;
     let resizeRaf = null;
     let activeIndex = 0;
@@ -252,8 +270,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     prefersReducedMotion.addEventListener('change', event => {
         if (event.matches) {
+            root.classList.add('webview-safe');
             layers.forEach(({ el }) => el.style.transform = '');
-        } else {
+        } else if (!isAndroidWebView) {
+            root.classList.remove('webview-safe');
             updateParallaxSizing();
             updateLayers();
         }
