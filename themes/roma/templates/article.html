@@ -30,6 +30,35 @@
         </a>
         {% endif %}
       </div>
+      {% if event_link %}
+      <div class="event-share-row" aria-label="Share event link">
+        <p class="event-share-label">Share this Meetup</p>
+        <div class="event-share-actions">
+          <a
+            class="event-share-button event-share-button-linkedin"
+            href="https://www.linkedin.com/sharing/share-offsite/?url={{ event_link|urlencode }}"
+            target="_blank"
+            rel="noopener"
+          >
+            <i class="bi bi-linkedin" aria-hidden="true"></i>
+            <span>Share on LinkedIn</span>
+          </a>
+          <button
+            class="event-share-button event-share-button-generic copy-share-button"
+            type="button"
+            data-share-url="{{ event_link }}"
+            data-share-title="{{ article.title }}"
+            data-share-label="Share link"
+            data-copy-label="Copy link"
+            data-copied-label="Link copied"
+          >
+            <i class="bi bi-share" aria-hidden="true"></i>
+            <span>Share link</span>
+          </button>
+        </div>
+        <p class="event-share-note">Let your friends and colleagues know about this event!</p>
+      </div>
+      {% endif %}
       <div class="event-detail-body page-description">
         {{ article.content }}
       </div>

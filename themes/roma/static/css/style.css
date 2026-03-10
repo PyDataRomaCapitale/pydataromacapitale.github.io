@@ -1165,6 +1165,78 @@ h2::after {
   gap: 0.85rem;
 }
 
+.event-share-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 0.35rem;
+}
+
+.event-share-label {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(207, 232, 255, 0.82);
+}
+
+.event-share-note {
+  margin: -0.2rem 0 0;
+  max-width: 48ch;
+  color: rgba(232, 237, 243, 0.78);
+}
+
+.event-share-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.event-share-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  min-height: 2.8rem;
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: #eff7ff;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.event-share-button:hover,
+.event-share-button:focus-visible {
+  transform: translateY(-1px);
+  color: #fff8ed;
+  border-color: rgba(255, 209, 143, 0.5);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+.event-share-button:focus-visible {
+  outline: none;
+}
+
+.event-share-button-linkedin i {
+  color: #8fc9ff;
+}
+
+.event-share-button-generic i {
+  color: #ffd18f;
+}
+
+.event-share-button.is-copied {
+  border-color: rgba(143, 212, 242, 0.52);
+  background: rgba(143, 212, 242, 0.14);
+  color: #f5fbff;
+}
+
 .event-meetup-btn {
   display: inline-flex;
   align-items: center;
