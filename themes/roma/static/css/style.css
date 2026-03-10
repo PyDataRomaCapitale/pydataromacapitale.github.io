@@ -1165,6 +1165,23 @@ h2::after {
   gap: 0.85rem;
 }
 
+.event-meetup-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  min-width: min(100%, 18rem);
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.event-meetup-btn-icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(14%) sepia(17%) saturate(1349%) hue-rotate(168deg) brightness(94%) contrast(97%);
+}
+
 .event-detail-body {
   max-width: none;
   margin: 0;

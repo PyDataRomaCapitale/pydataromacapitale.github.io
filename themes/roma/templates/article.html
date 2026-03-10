@@ -24,9 +24,11 @@
       {% endif %}
       <div class="event-detail-actions">
         {% if event_link %}
-        <a class="btn btn-roma" href="{{ event_link }}" target="_blank" rel="noopener">RSVP on Meetup</a>
+        <a class="btn btn-roma event-meetup-btn" href="{{ event_link }}" target="_blank" rel="noopener">
+          <img src="{{ SITEURL }}/images/meetup.svg" alt="" aria-hidden="true" class="event-meetup-btn-icon">
+          <span>RSVP on Meetup</span>
+        </a>
         {% endif %}
-        <a class="btn event-outline-btn" href="{{ SITEURL }}/#event">Browse events</a>
       </div>
       <div class="event-detail-body page-description">
         {{ article.content }}
