@@ -167,37 +167,28 @@
             {% endfor %}
             {% if event_state.items %}
             {% for article in event_state.items %}
-            {% set event_link = article.metadata.get('event_link') if article.metadata else None %}
             {% set event_location = article.metadata.get('location') if article.metadata else None %}
             <div class="col-sm-12 col-md-6 col-lg-5 col-xl-4 mb-4">
-                <div class="card event-card h-100 shadow-sm">
-                    <div class="card-body">
-                        <p class="event-card-date">
-                            <i class="bi bi-calendar3" aria-hidden="true"></i>
-                            <span>{{ article.date.strftime("%A, %B %-d, %Y") }}</span>
-                        </p>
-                        <h5 class="card-title">{{ article.title }}</h5>
-                        {% if event_location %}
-                        <p class="event-card-location">
-                            <i class="bi bi-geo-alt"></i>
-                            <span>{{ event_location }}</span>
-                        </p>
-                        {% endif %}
-                        {% if article.summary %}
-                        <p class="card-text">{{ article.summary }}</p>
-                        {% else %}
-                        <p class="card-text">Join the next PyData Roma Capitale meetup and RSVP on Meetup for the latest agenda and venue details.</p>
-                        {% endif %}
-                    </div>
-                    <div class="card-footer small">
-                        <div class="event-card-actions">
-                            <a class="event-card-link" href="{{ SITEURL }}/{{ article.url }}">View details</a>
-                            {% if event_link %}
-                            <a class="event-card-secondary" href="{{ event_link }}" target="_blank" rel="noopener">RSVP</a>
+                <a class="event-card-shell" href="{{ SITEURL }}/{{ article.url }}" aria-label="View event details for {{ article.title }}">
+                    <div class="card event-card h-100 shadow-sm">
+                        <div class="card-body">
+                            <p class="event-card-date">
+                                <i class="bi bi-calendar3" aria-hidden="true"></i>
+                                <span>{{ article.date.strftime("%A, %B %-d, %Y") }}</span>
+                            </p>
+                            <h5 class="card-title">{{ article.title }}</h5>
+                            {% if event_location %}
+                            <p class="event-card-location">
+                                <i class="bi bi-geo-alt"></i>
+                                <span>{{ event_location }}</span>
+                            </p>
                             {% endif %}
                         </div>
+                        <div class="card-footer small">
+                            <span class="event-card-cta">View details <i class="bi bi-arrow-right"></i></span>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             {% endfor %}
             {% else %}

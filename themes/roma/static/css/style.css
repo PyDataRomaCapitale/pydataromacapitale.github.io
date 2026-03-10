@@ -968,14 +968,33 @@ h2::after {
   position: relative;
 }
 
+.event-card-shell {
+  display: block;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
 .event-card .card-body {
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
+  justify-content: space-between;
 }
 
-.event-card:hover {
+.event-card-shell:hover .event-card,
+.event-card-shell:focus-visible .event-card {
   transform: translateY(-6px);
+  border-color: rgba(255, 209, 143, 0.38);
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.34) !important;
+}
+
+.event-card-shell:focus-visible {
+  outline: none;
+}
+
+.event-card-shell:focus-visible .event-card {
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.34), 0 0 0 2px rgba(255, 209, 143, 0.7) !important;
 }
 
 .event-card-date {
@@ -1000,12 +1019,6 @@ h2::after {
   margin-bottom: 0;
 }
 
-.event-card .card-text {
-  margin-bottom: 0;
-  color: rgba(232, 237, 243, 0.9);
-  min-height: 4.8rem;
-}
-
 .event-card-location {
   display: inline-flex;
   align-items: center;
@@ -1028,42 +1041,27 @@ h2::after {
   ) !important;
 }
 
-.event-card-actions {
-  display: flex;
+.event-card-cta {
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-}
-
-.event-card-link {
+  gap: 0.45rem;
   color: #fff0d8;
   font-weight: 700;
   letter-spacing: 0.01em;
-  text-decoration: none;
 }
 
-.event-card-link:hover {
+.event-card-cta i {
+  transition: transform 0.2s ease;
+}
+
+.event-card-shell:hover .event-card-cta,
+.event-card-shell:focus-visible .event-card-cta {
   color: #ffbf78;
 }
 
-.event-card-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 2.4rem;
-  padding: 0.4rem 0.9rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #eef7ff;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.event-card-secondary:hover {
-  color: #fff4e2;
-  border-color: rgba(255, 209, 143, 0.55);
-  background: rgba(255, 255, 255, 0.12);
+.event-card-shell:hover .event-card-cta i,
+.event-card-shell:focus-visible .event-card-cta i {
+  transform: translateX(2px);
 }
 
 .article-shell {
