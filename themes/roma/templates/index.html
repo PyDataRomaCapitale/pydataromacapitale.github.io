@@ -168,7 +168,7 @@
             {% if event_state.items %}
             {% for article in event_state.items %}
             {% set event_location = article.metadata.get('location') if article.metadata else None %}
-            <div class="col-sm-12 col-md-6 col-lg-5 col-xl-4 mb-4">
+            <div class="col-sm-12 col-md-10 col-lg-7 col-xl-6 mb-4">
                 <a class="event-card-shell" href="{{ SITEURL }}/{{ article.url }}" aria-label="View event details for {{ article.title }}">
                     <div class="card event-card h-100 shadow-sm">
                         <div class="card-body">

@@ -961,11 +961,36 @@ h2::after {
 
 .event-card {
   background: linear-gradient(
-    160deg,
-    rgba(20, 47, 66, 0.94),
-    rgba(9, 20, 32, 0.96)
+    155deg,
+    rgba(25, 57, 80, 0.97),
+    rgba(10, 24, 38, 0.98)
   );
   position: relative;
+  border-color: rgba(255, 231, 186, 0.18);
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+  overflow: hidden;
+}
+
+.event-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 26%;
+  background: radial-gradient(
+    circle at 14% 12%,
+    rgba(255, 191, 120, 0.24),
+    rgba(255, 191, 120, 0)
+  );
+  pointer-events: none;
+}
+
+.event-card::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: calc(1rem - 1px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  pointer-events: none;
 }
 
 .event-card-shell {
@@ -978,15 +1003,17 @@ h2::after {
 .event-card .card-body {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 1rem;
   justify-content: space-between;
+  min-height: 13.5rem;
+  padding: 1.45rem 1.5rem 1.15rem;
 }
 
 .event-card-shell:hover .event-card,
 .event-card-shell:focus-visible .event-card {
-  transform: translateY(-6px);
-  border-color: rgba(255, 209, 143, 0.38);
-  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.34) !important;
+  transform: translateY(-8px) scale(1.01);
+  border-color: rgba(255, 209, 143, 0.5);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.46), 0 0 0 1px rgba(255, 255, 255, 0.06) inset !important;
 }
 
 .event-card-shell:focus-visible {
@@ -994,7 +1021,7 @@ h2::after {
 }
 
 .event-card-shell:focus-visible .event-card {
-  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.34), 0 0 0 2px rgba(255, 209, 143, 0.7) !important;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.46), 0 0 0 2px rgba(255, 209, 143, 0.7) !important;
 }
 
 .event-card-date {
@@ -1017,6 +1044,8 @@ h2::after {
 
 .event-card .card-title {
   margin-bottom: 0;
+  font-size: clamp(1.25rem, 2vw, 1.55rem);
+  line-height: 1.15;
 }
 
 .event-card-location {
@@ -1036,9 +1065,10 @@ h2::after {
 .event-card .card-footer {
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.08),
-    rgba(255, 255, 255, 0.14)
+    rgba(255, 255, 255, 0.09),
+    rgba(255, 255, 255, 0.16)
   ) !important;
+  padding: 0.95rem 1.5rem !important;
 }
 
 .event-card-cta {
