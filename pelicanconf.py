@@ -50,7 +50,7 @@ BOARD_MEMBERS = [
     {
         "name": "Carlo A. Venditti",
         "photo": "images/people/Carlo.jpg",
-        "linkedin": "#",
+        "linkedin": "https://www.linkedin.com/in/carlo-antonio-venditti-6649b0193/",
         "role": "Organizer",
         "tagline": "Freelance Software Engineer",
     },
@@ -64,7 +64,7 @@ BOARD_MEMBERS = [
     {
         "name": "Vanessa Iannozzi",
         "photo": "images/people/Vanessa.jpg",
-        "linkedin": "#",
+        "linkedin": "https://www.linkedin.com/in/vanessa-iannozzi-01903725a/",
         "role": "Organizer",
         "tagline": "Data Scientist presso ELIS Innovation Hub",
     },
