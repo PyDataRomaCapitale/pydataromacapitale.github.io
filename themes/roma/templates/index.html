@@ -37,22 +37,14 @@
         </div>
 
         <div class="d-flex justify-content-center flex-wrap gap-4">
-            {% for name, url in SOCIAL %}
-            {% if name == "Telegram" %}
-            <a class="social-link" href="{{ url }}" aria-label="Telegram">
-                <i class="bi bi-telegram"></i>
-            </a>
-            {% elif name == "GitHub" %}
-            <a class="social-link" href="{{ url }}" aria-label="GitHub">
-                <i class="bi bi-github"></i>
-            </a>
-            {% elif name == "Meetup" %}
-            <a class="social-link" href="{{ url }}" aria-label="Meetup">
+            {% for name, url, icon in SOCIAL %}
+            {% if icon == "meetup" %}
+            <a class="social-link" href="{{ url }}" aria-label="{{ name }}">
                 <img src="{{ SITEURL }}/images/meetup.svg" alt="" class="icon-img">
             </a>
-            {% elif name == "LinkedIn" %}
-            <a class="social-link" href="{{ url }}" aria-label="LinkedIn">
-                <i class="bi bi-linkedin"></i>
+            {% else %}
+            <a class="social-link" href="{{ url }}" aria-label="{{ name }}">
+                <i class="{{ icon }}"></i>
             </a>
             {% endif %}
             {% endfor %}

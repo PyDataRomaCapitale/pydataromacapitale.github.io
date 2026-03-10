@@ -2,19 +2,19 @@
 Sync upcoming public Meetup events to Markdown in content/events/,
 but keep only the title and an RSVP link.
 
-Needs:  pip install requests ics pytz
+Needs:  pip install requests ics
 """
+
 from __future__ import annotations
 import os, re, datetime as dt, tempfile, shutil
 import logging
-import requests, pytz
+import requests
 from ics import Calendar, Event
 from pelican import signals
 
-MEETUP_GROUP   = "pydata-roma-capitale"          # overridden from pelicanconf.py
-EVENT_DIR      = "content/events"
-ICS_URL        = "https://www.meetup.com/{group}/events/ical"
-LINK_TPL       = "https://www.meetup.com/{group}/events/{event_id}"
+MEETUP_GROUP = "pydata-roma-capitale"  # overridden from pelicanconf.py
+ICS_URL = "https://www.meetup.com/{group}/events/ical"
+LINK_TPL = "https://www.meetup.com/{group}/events/{event_id}"
 
 FRONTMATTER = """Title: {title}
 Date: {date:%Y-%m-%d %H:%M}
@@ -26,8 +26,10 @@ Slug: meetup-{slug}
 
 slug_pat = re.compile(r"[^\w\-]+")
 
+
 def slugify(text: str) -> str:
     return slug_pat.sub("-", text.lower()).strip("-")
+
 
 def fetch_events(group: str) -> dict[str, Event]:
     """Return upcoming events for the given Meetup group.
@@ -47,13 +49,14 @@ def fetch_events(group: str) -> dict[str, Event]:
         return {}
 
     cal = Calendar(resp.text)
-    now = dt.datetime.now(pytz.UTC)
+    now = dt.datetime.now(dt.timezone.utc)
     return {ev.uid: ev for ev in cal.events if ev.begin > now}
+
 
 def write_md(ev: Event, path: str, group: str):
     slug = slugify(ev.uid)
-    meetup_id = ev.uid.split("@")[0].replace('event_', '')  # part before "@meetup.com"
-    link  = LINK_TPL.format(group=group, event_id=meetup_id)
+    meetup_id = ev.uid.split("@")[0].replace("event_", "")  # part before "@meetup.com"
+    link = LINK_TPL.format(group=group, event_id=meetup_id)
 
     body = (
         FRONTMATTER.format(
@@ -69,9 +72,11 @@ def write_md(ev: Event, path: str, group: str):
     tmp.close()
     shutil.move(tmp.name, path)
 
+
 def sync(pelican):
     group = pelican.settings.get("MEETUP_GROUP", MEETUP_GROUP)
-    os.makedirs(EVENT_DIR, exist_ok=True)
+    event_dir = os.path.join(pelican.settings["PATH"], "events")
+    os.makedirs(event_dir, exist_ok=True)
 
     live = fetch_events(group)
     wanted = set()
@@ -79,16 +84,17 @@ def sync(pelican):
     # create / refresh
     for uid, ev in live.items():
         slug = slugify(uid)
-        fn   = f"meetup-{slug}.md"
-        path = os.path.join(EVENT_DIR, fn)
+        fn = f"meetup-{slug}.md"
+        path = os.path.join(event_dir, fn)
         wanted.add(fn)
 
         write_md(ev, path, group)
 
     # remove obsolete files
-    for fn in os.listdir(EVENT_DIR):
+    for fn in os.listdir(event_dir):
         if fn.startswith("meetup-") and fn.endswith(".md") and fn not in wanted:
-            os.remove(os.path.join(EVENT_DIR, fn))
+            os.remove(os.path.join(event_dir, fn))
+
 
 def register():
     signals.initialized.connect(sync)

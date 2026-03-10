@@ -75,14 +75,14 @@ PLUGINS = ["meetup_events"]
 MEETUP_GROUP = "pydata-roma-capitale"
 
 SOCIAL = [
-    ("Telegram", "https://t.me/pydataroma"),
-    ("LinkedIn", "https://www.linkedin.com/company/pydata-roma"),
-    ("Meetup", "https://www.meetup.com/pydata-roma-capitale"),
-    ("GitHub", "https://github.com/PyDataRomaCapitale"),
+    ("Telegram", "https://t.me/pydataroma", "bi bi-telegram"),
+    ("LinkedIn", "https://www.linkedin.com/company/pydata-roma", "bi bi-linkedin"),
+    ("Meetup", "https://www.meetup.com/pydata-roma-capitale", "meetup"),
+    ("GitHub", "https://github.com/PyDataRomaCapitale", "bi bi-github"),
 ]
 
 JINJA_GLOBALS = {
-    "now": datetime.datetime.utcnow,
+    "now": lambda: datetime.datetime.now(datetime.timezone.utc),
 }
 
 MEETUP_LINK = "https://www.meetup.com/pydata-roma-capitale"
