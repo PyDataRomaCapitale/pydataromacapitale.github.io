@@ -1,14 +1,37 @@
 {% extends "base.html" %}
 {% block content %}
-<header class="strip--info text-white text-center py-5">
+{% set event_link = article.metadata.get('event_link') if article.metadata else None %}
+{% set event_location = article.metadata.get('location') if article.metadata else None %}
+<section class="article-shell py-5">
   <div class="container">
-    <h1 class="fw-bold">{{ article.title }}</h1>
-    <p class="small mb-0">{{ article.date.strftime('%B %-d, %Y') }}</p>
+    <article class="floating-card event-detail-card">
+      <div class="event-detail-topline">Upcoming event</div>
+      <p class="event-card-date event-detail-date">
+        <i class="bi bi-calendar3" aria-hidden="true"></i>
+        <span>{{ article.date.strftime('%A, %B %-d, %Y') }}</span>
+      </p>
+      <h1 class="event-detail-title">{{ article.title }}</h1>
+      {% if article.summary %}
+      <p class="event-detail-summary">{{ article.summary|striptags }}</p>
+      {% endif %}
+      {% if event_location %}
+      <div class="event-detail-meta">
+        <span class="event-meta-chip">
+          <i class="bi bi-geo-alt"></i>
+          <span>{{ event_location }}</span>
+        </span>
+      </div>
+      {% endif %}
+      <div class="event-detail-actions">
+        {% if event_link %}
+        <a class="btn btn-roma" href="{{ event_link }}" target="_blank" rel="noopener">RSVP on Meetup</a>
+        {% endif %}
+        <a class="btn event-outline-btn" href="{{ SITEURL }}/#event">Browse events</a>
+      </div>
+      <div class="event-detail-body page-description">
+        {{ article.content }}
+      </div>
+    </article>
   </div>
-</header>
-<main class="py-5">
-  <div class="container">
-    {{ article.content }}
-  </div>
-</main>
+</section>
 {% endblock %}
