@@ -278,4 +278,70 @@ document.addEventListener('DOMContentLoaded', function() {
             updateLayers();
         }
     });
+
+    const copyShareButtons = Array.from(document.querySelectorAll('.copy-share-button'));
+    const copyText = async (text) => {
+        if (navigator.clipboard?.writeText) {
+            await navigator.clipboard.writeText(text);
+            return true;
+        }
+
+        const helper = document.createElement('textarea');
+        helper.value = text;
+        helper.setAttribute('readonly', 'readonly');
+        helper.style.position = 'absolute';
+        helper.style.left = '-9999px';
+        document.body.appendChild(helper);
+        helper.select();
+        const copied = document.execCommand('copy');
+        document.body.removeChild(helper);
+        return copied;
+    };
+
+    copyShareButtons.forEach(button => {
+        const label = button.querySelector('span');
+        const shareSupported = typeof navigator.share === 'function';
+        const defaultLabel = shareSupported
+            ? (button.dataset.shareLabel || 'Share link')
+            : (button.dataset.copyLabel || 'Copy link');
+        const copiedLabel = button.dataset.copiedLabel || 'Copied';
+        const shareTitle = button.dataset.shareTitle || document.title;
+        let resetTimer = null;
+
+        if (label) {
+            label.textContent = defaultLabel;
+        }
+
+        button.addEventListener('click', async () => {
+            const shareUrl = button.dataset.shareUrl;
+            if (!shareUrl) {
+                return;
+            }
+
+            try {
+                if (shareSupported) {
+                    await navigator.share({
+                        title: shareTitle,
+                        url: shareUrl,
+                    });
+                    return;
+                }
+
+                await copyText(shareUrl);
+                if (label) {
+                    label.textContent = copiedLabel;
+                }
+                button.classList.add('is-copied');
+                window.clearTimeout(resetTimer);
+                resetTimer = window.setTimeout(() => {
+                    if (label) {
+                        label.textContent = defaultLabel;
+                    }
+                    button.classList.remove('is-copied');
+                }, 1800);
+            } catch (error) {
+                console.warn('Unable to copy share link', error);
+            }
+        });
+    });
 });
